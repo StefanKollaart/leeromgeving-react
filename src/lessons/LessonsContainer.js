@@ -1,10 +1,13 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import LessonItem from './LessonItem'
 import { connect } from 'react-redux'
 import fetchLessons from '../actions/lessons/fetch'
 
-
 class LessonsContainer extends PureComponent {
+  static propTypes = {
+    lessons: PropTypes.array.isRequired,
+    fetchLessons: PropTypes.func.isRequired,
+  }
   renderLessons(lesson, index) {
     return <LessonItem key={index} {...lesson} />
   }
@@ -32,4 +35,4 @@ const mapStateToProps = ({ lessons }) => ({
   lessons
 })
 
-export default connect(mapStateToProps)(LessonsContainer)
+export default connect(mapStateToProps, { fetchLessons })(LessonsContainer)
