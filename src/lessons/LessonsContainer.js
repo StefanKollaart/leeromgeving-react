@@ -1,11 +1,16 @@
 import React, { PureComponent } from 'react'
 import LessonItem from './LessonItem'
 import { connect } from 'react-redux'
+import fetchLessons from '../actions/lessons/fetch'
 
 
 class LessonsContainer extends PureComponent {
   renderLessons(lesson, index) {
     return <LessonItem key={index} {...lesson} />
+  }
+
+  componentDidMount() {
+    this.props.fetchLessons()
   }
 
   render() {

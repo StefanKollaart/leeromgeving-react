@@ -1,12 +1,8 @@
-const lessons = [
-  {
-    lessonNumber: 1,
-    title: "Pedicure les 1",
-    video: "http://www.google.nl",
-    tekst: "Hello World",
-  }
-]
-
+import { FETCHED_LESSONS } from '../actions/lessons/fetch'
 export default (state = lessons, { type, payload } = {}) => {
+  switch(type) {
+    case FETCHED_LESSONS:
+      return [].concat(payload)
+  }
   return state
 }
