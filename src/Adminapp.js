@@ -23,8 +23,10 @@ class Adminapp extends React.Component {
       )
     } else {
       return (
-        <div>
-          <SignIn />
+        <div className="app">
+          <div className="signin">
+            <SignIn />
+          </div>
         </div>
       )
     }

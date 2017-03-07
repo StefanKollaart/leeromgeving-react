@@ -14,10 +14,7 @@ class LessonItem extends PureComponent {
 
     return (
       <article className = "Lesson">
-        <h1><Link to={`/lessons/${_id}`}>{ title }</Link></h1>
-        <div>
-          <p>{ tekst }</p>
-        </div>
+        <h1><Link to={`/lessons/${_id}`}>{lessonNumber}. { title }</Link></h1>
       </article>
     )
   }

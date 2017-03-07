@@ -10,11 +10,12 @@ export class LessonPage extends PureComponent {
   }
 
   render() {
-    const { title } = this.props
+    const { title, video, tekst } = this.props
 
     return(
       <div className="lesson page">
         <h1>{ title }</h1>
+        
       </div>
     )
   }

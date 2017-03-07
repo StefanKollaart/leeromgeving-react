@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import signIn from '../actions/user/sign-in'
+import Brand from '../components/Brand'
 
 export class SignIn extends PureComponent {
   constructor() {
@@ -21,6 +22,7 @@ export class SignIn extends PureComponent {
   render() {
     return (
       <div className="sign-in form">
+        <Brand />
         <h1>Log in</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>

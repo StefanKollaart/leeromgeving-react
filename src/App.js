@@ -24,7 +24,11 @@ class App extends React.Component {
       )
     } else {
       return (
-        <SignIn />
+        <div className="app">
+          <div className="signin">
+            <SignIn />
+          </div>
+        </div>
       )
     }
   }
