@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import LessonItem from './LessonItem'
+import { connect } from 'react-redux'
+
 
 class LessonsContainer extends PureComponent {
   renderLessons(lesson, index) {
@@ -21,4 +23,8 @@ class LessonsContainer extends PureComponent {
   }
 }
 
-export default LessonsContainer
+const mapStateToProps = ({ lessons }) => ({
+  lessons
+})
+
+export default connect(mapStateToProps)(LessonsContainer)
