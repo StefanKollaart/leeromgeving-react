@@ -108,11 +108,11 @@ export class SignUp extends PureComponent {
   render() {
     return (
       <div className="sign-up form">
-        <h1>Sign Up</h1>
+        <h1>Create new user</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
           <div className="input">
-            <input ref="name" type="text" placeholder="Your name"
+            <input ref="name" type="text" placeholder="Username"
               onChange={this.validateName.bind(this)} />
             { this.state.nameError ?
               <p className="formError">{ this.state.nameError }</p> :
@@ -120,7 +120,7 @@ export class SignUp extends PureComponent {
             }
           </div>
           <div className="input">
-            <input ref="email" type="email" placeholder="Email address"
+            <input ref="email" type="email" placeholder="E-mail address"
               onChange={this.validateEmail.bind(this)} />
             { this.state.emailError ?
               <p className="formError">{ this.state.emailError }</p> :
