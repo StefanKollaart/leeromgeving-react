@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import signOut from '../actions/user/sign-out'
+import './Navigation.scss'
 
 export class Navigation extends PureComponent {
   static propTypes = {

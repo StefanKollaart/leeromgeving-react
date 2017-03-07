@@ -3,6 +3,7 @@ import LessonsContainer from './lessons/LessonsContainer'
 import Navigation from './components/Navigation'
 import { connect } from 'react-redux'
 import SignIn from './users/SignIn'
+import './App.scss'
 
 class App extends React.Component {
   static propTypes = {
@@ -16,7 +17,9 @@ class App extends React.Component {
       return (
         <div className="app">
           <Navigation />
-          {this.props.children}
+          <div className="content">
+            {this.props.children}
+          </div>
         </div>
       )
     } else {
