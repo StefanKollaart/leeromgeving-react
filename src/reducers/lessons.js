@@ -3,6 +3,8 @@ export default (state = [], { type, payload } = {}) => {
   switch(type) {
     case FETCHED_LESSONS:
       return [].concat(payload)
+
+    default :
+      return state
   }
-  return state
 }

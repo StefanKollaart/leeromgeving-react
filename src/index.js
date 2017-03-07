@@ -7,6 +7,8 @@ import { Router, Route, IndexRoute } from 'react-router'
 
 import LessonsContainer from './lessons/LessonsContainer'
 import LessonPage from './lessons/LessonPage'
+import SignUp from './users/SignUp'
+import SignIn from './users/SignIn'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,6 +16,10 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
         <Route path="/lessons/:lessonId" component={LessonPage} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-in" component={SignIn} />
+      </Route>
+      <Route path ="/admin">
       </Route>
     </Router>
   </Provider>,
