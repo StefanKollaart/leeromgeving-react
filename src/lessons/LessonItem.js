@@ -6,8 +6,8 @@ class LessonItem extends PureComponent {
   static propTypes = {
     lessonNumber: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    video: PropTypes.string,
-    tekst: PropTypes.string,
+    video: PropTypes.array,
+    tekst: PropTypes.array,
   }
   render() {
     const { _id, lessonNumber, title, video, tekst } = this.props
