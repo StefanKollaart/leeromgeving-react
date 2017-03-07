@@ -21,8 +21,8 @@ export class Navigation extends PureComponent {
           <li><Link to="/">Home</Link></li>
           <li>
             { signedIn ?
-              <a href="#" onClick={this.signOut.bind(this)}>Sign out</a> :
-              <div><Link to="/sign-up">Sign up</Link> | <Link to="/sign-in">Sign in</Link></div>
+              <a href="#" onClick={this.signOut.bind(this)}>Log uit</a> :
+              <div><Link to="/sign-in">Log in</Link></div>
             }
           </li>
         </ul>

@@ -7,10 +7,13 @@ const lessons = api.service('lessons')
 
 export default() => {
   return(dispatch) => {
-    lessons.find()
-      .then((result) => {
-        dispatch(fetchedLessons(result))
-      })
+    api.app.authenticate()
+    .then((authResult) => {
+      lessons.find()
+        .then((result) => {
+          dispatch(fetchedLessons(result))
+        })
+    })
   }
 }
 

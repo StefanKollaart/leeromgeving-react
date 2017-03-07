@@ -12,7 +12,8 @@ export class SignUp extends PureComponent {
     event.preventDefault()
     if (this.validateAll()) {
       const user = {
-        name: this.refs.name.value,
+        first_name: this.refs.firstname.value,
+        last_name: this.refs.firstname.value,
         email: this.refs.email.value,
         password: this.refs.password.value
       }
@@ -21,49 +22,8 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    return this.validateName() &&
-      this.validateEmail() &&
-      this.validatePassword() &&
+    return this.validatePassword() &&
       this.validatePasswordConfirmation()
-  }
-
-  validateName() {
-    const { name } = this.refs
-
-    if (name.value.length > 1) {
-      this.setState({
-        nameError: null
-      })
-      return true
-    }
-
-    this.setState({
-      nameError: 'Please provide your name'
-    })
-    return false
-  }
-
-  validateEmail() {
-    const { email } = this.refs
-
-    if (email.value.match(/^[a-z0-9.\_-]+@[a-z0-9.\_-]+\.[a-z0-9.\_-]+$/)) {
-      this.setState({
-        emailError: null
-      })
-      return true
-    }
-
-    if (email.value === '') {
-      this.setState({
-        emailError: 'Please provide your email address'
-      })
-      return false
-    }
-
-    this.setState({
-      emailError: 'Please provide a valid email address'
-    })
-    return false
   }
 
   validatePassword() {
@@ -71,7 +31,7 @@ export class SignUp extends PureComponent {
 
     if (password.value.length < 6) {
       this.setState({
-        passwordError: 'Password is too short'
+        passwordError: 'Wachtwoord is te kort'
       })
       return false
     }
@@ -84,7 +44,7 @@ export class SignUp extends PureComponent {
     }
 
     this.setState({
-      passwordError: 'Password should contain both letters and numbers'
+      passwordError: 'Het wachtwoord moet zowel letters als nummers bevatten'
     })
     return false
   }
@@ -100,7 +60,7 @@ export class SignUp extends PureComponent {
     }
 
     this.setState({
-      passwordConfirmationError: 'Passwords do not match'
+      passwordConfirmationError: 'Wachtwoorden zijn niet gelijk'
     })
     return false
   }
@@ -108,27 +68,20 @@ export class SignUp extends PureComponent {
   render() {
     return (
       <div className="sign-up form">
-        <h1>Create new user</h1>
+        <h1>Nieuwe gebruiker</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
           <div className="input">
-            <input ref="name" type="text" placeholder="Username"
-              onChange={this.validateName.bind(this)} />
-            { this.state.nameError ?
-              <p className="formError">{ this.state.nameError }</p> :
-              null
-            }
+            <input ref="firstname" type="text" placeholder="Voornaam" />
           </div>
           <div className="input">
-            <input ref="email" type="email" placeholder="E-mail address"
-              onChange={this.validateEmail.bind(this)} />
-            { this.state.emailError ?
-              <p className="formError">{ this.state.emailError }</p> :
-              null
-            }
+            <input ref="lastname" type="text" placeholder="Achternaam" />
           </div>
           <div className="input">
-            <input ref="password" type="password" placeholder="Password"
+            <input ref="email" type="text" placeholder="E-mail" />
+          </div>
+          <div className="input">
+            <input ref="password" type="password" placeholder="Wachtwoord"
               onChange={this.validatePassword.bind(this)} />
             { this.state.passwordError ?
               <p className="formError">{ this.state.passwordError }</p> :
@@ -136,7 +89,7 @@ export class SignUp extends PureComponent {
             }
           </div>
           <div className="input">
-            <input ref="passwordConfirmation" type="password" placeholder="Repeat Password"
+            <input ref="passwordConfirmation" type="password" placeholder="Wachtwoord"
               onKeyUp={this.validatePasswordConfirmation.bind(this)}
               onChange={this.validatePasswordConfirmation.bind(this)} />
             { this.state.passwordConfirmationError ?
@@ -144,7 +97,7 @@ export class SignUp extends PureComponent {
               null
             }
           </div>
-          <input type="submit" value="Sign up" />
+          <input type="submit" value="Aanmaken" />
         </form>
       </div>
     )

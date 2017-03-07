@@ -18,8 +18,8 @@ export class Adminnavigation extends PureComponent {
     return (
       <nav className="navigation">
         <ul>
-          <li><Link to="/sign-up">Create new user</Link></li>
-          <li><a href="#" onClick={this.signOut.bind(this)}>Sign out</a></li>
+          <li><Link to="/sign-up">Nieuwe gebruiker</Link></li>
+          <li><a href="#" onClick={this.signOut.bind(this)}>Log uit</a></li>
         </ul>
       </nav>
     )

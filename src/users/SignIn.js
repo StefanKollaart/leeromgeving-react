@@ -21,7 +21,7 @@ export class SignIn extends PureComponent {
   render() {
     return (
       <div className="sign-in form">
-        <h1>Sign In</h1>
+        <h1>Log in</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
           <div className="input">
@@ -30,7 +30,7 @@ export class SignIn extends PureComponent {
           <div className="input">
             <input ref="password" type="password" placeholder="Password" />
           </div>
-          <input type="submit" value="Sign in" />
+          <input type="submit" value="Inloggen" />
         </form>
       </div>
     )
