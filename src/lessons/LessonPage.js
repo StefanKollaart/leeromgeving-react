@@ -19,8 +19,6 @@ export class LessonPage extends PureComponent {
     this.props.fetchLessons()
   }
 
-  debugger
-
   render() {
     const { title, video, tekst } = this.props
 

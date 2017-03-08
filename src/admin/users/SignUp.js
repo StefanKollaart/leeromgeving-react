@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import signUp from '../actions/user/sign-up'
+import signUp from '../../actions/user/sign-up'
 
 export class SignUp extends PureComponent {
   constructor() {
