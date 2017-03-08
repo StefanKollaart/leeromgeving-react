@@ -18,7 +18,6 @@ export class CreateLesson extends PureComponent {
     this.handleTitle = this.handleTitle.bind(this)
     this.addTextField = this.addTextField.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleTekstField = this.handleTekstField.bind(this)
   }
 
   handleNumber(event) {
@@ -33,27 +32,30 @@ export class CreateLesson extends PureComponent {
     });
   }
 
-  handleTekstField(event) {
-    this.setState({
-      tekstFieldsValue: event.target.value
-    })
+  handleTekstField(thisId, event) {
+        var newTekstFieldsValues = this.state.tekstFieldsValue
+        newTekstFieldsValues[thisId -1] = event.target.value
+        this.setState({
+          tekstFieldsValue: newTekstFieldsValues
+        })
   }
 
   addTextField() {
     let thisId = this.state.tekstFields.length + 1
     this.setState({
       tekstFields: this.state.tekstFields.concat(<div className="input" key={thisId}>
-        <input type="text" placeholder="Tekst" value={this.state.tekstFields[thisId]} key={thisId} onChange={this.handleTekstField} />
+        <input type="text" placeholder="Tekst" value={this.state.tekstFields[thisId]} key={thisId} onChange={this.handleTekstField.bind(this, thisId)} />
       </div>)
     })
   }
 
   handleSubmit(event) {
-    debugger
     event.preventDefault()
+    debugger
     const lesson = {
       lessonNumber: this.state.numberValue,
       title: this.state.titleValue,
+      tekst: this.state.tekstFieldsValue,
     }
     this.props.newLesson(lesson)
   }
