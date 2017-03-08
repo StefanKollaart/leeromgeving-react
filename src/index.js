@@ -11,6 +11,8 @@ import LessonPage from './lessons/LessonPage'
 import SignUp from './users/SignUp'
 import SignIn from './users/SignIn'
 import Admindex from './admin/Admindex'
+import CreateLesson from './admin/lessons/CreateLesson'
+import AdminLessons from './admin/lessons/AdminLessons'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -22,7 +24,9 @@ ReactDOM.render(
       </Route>
       <Route path="/admin" component={Adminapp}>
         <IndexRoute component={Admindex} />
-        <Route path="/sign-up" component={SignUp} />
+        <Route path="/admin/sign-up" component={SignUp} />
+        <Route path="/admin/lessons" component={AdminLessons} />
+        <Route path="/admin/lessons/create" component={CreateLesson} />
       </Route>
     </Router>
   </Provider>,

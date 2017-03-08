@@ -7,6 +7,7 @@ import './Navigation.scss'
 export class Navigation extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
   }
 
   signOut(event) {
@@ -15,17 +16,22 @@ export class Navigation extends PureComponent {
   }
 
   render() {
-    const { signedIn } = this.props
+    const { signedIn, isAdmin } = this.props
     return (
       <nav className="navigation">
         <ul>
           <li><Link to="/">Home</Link></li>
+          <div className="nav-actions">
+          <li>
+            {(isAdmin && <Link to="/admin">Admin panel</Link>) }
+          </li>
           <li>
             { signedIn ?
               <a href="#" onClick={this.signOut.bind(this)}>Log uit</a> :
               <div><Link to="/sign-in">Log in</Link></div>
             }
           </li>
+          </div>
         </ul>
       </nav>
     )
@@ -33,7 +39,8 @@ export class Navigation extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id)
+  signedIn: (!!currentUser && !!currentUser._id),
+  isAdmin: (currentUser && currentUser.admin == true)
 })
 
 export default connect(mapStateToProps, { signOut })(Navigation)
