@@ -21,6 +21,8 @@ import SignUp from './admin/users/SignUp'
 import EditUser from './admin/users/EditUser'
 import UsersContainer from './admin/users/UsersContainer'
 
+import AdminGroups from './admin/groups/AdminGroups'
+import CreateGroup from './admin/groups/CreateGroup'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -38,6 +40,8 @@ ReactDOM.render(
         <Route path="/admin/sign-up" component={SignUp} />
         <Route path="/admin/lessons" component={AdminLessons} />
         <Route path="/admin/lessons/create" component={CreateLesson} />
+        <Route path="/admin/groups" component={AdminGroups} />
+        <Route path="/admin/groups/create" component={CreateGroup} />
       </Route>
     </Router>
   </Provider>,

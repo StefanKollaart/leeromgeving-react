@@ -70,7 +70,6 @@ export class CreateLesson extends PureComponent {
 
   handleSubmit(event) {
     event.preventDefault()
-    debugger
     const lesson = {
       lessonNumber: this.state.numberValue,
       title: this.state.titleValue,

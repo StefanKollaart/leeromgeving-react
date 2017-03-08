@@ -19,6 +19,7 @@ export class Adminnavigation extends PureComponent {
       <nav className="navigation">
         <ul>
           <li><Link to="/admin/users">Gebruikers</Link></li>
+          <li><Link to="/admin/groups">Groepen</Link></li>
           <li><Link to="/admin/lessons">Lessen</Link></li>
           <div className="nav-actions">
             <li><Link to="/">Leeromgeving</Link></li>
