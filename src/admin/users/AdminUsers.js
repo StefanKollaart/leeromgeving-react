@@ -2,13 +2,13 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-class AdminLessons extends PureComponent {
+class AdminUsers extends PureComponent {
   render() {
     return(
       <div>
-        <h1>Lessen</h1>
+        <h1>Gebruikers</h1>
         <ul>
-          <li><Link to="/admin/lessons/create">Nieuwe les</Link></li>
+          <li><Link to="/admin/users/sign-up">Nieuwe gebruiker</Link></li>
         </ul>
       </div>
     )
@@ -16,4 +16,4 @@ class AdminLessons extends PureComponent {
 }
 
 
-export default AdminLessons
+export default AdminUsers

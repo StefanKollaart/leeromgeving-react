@@ -12,11 +12,13 @@ export class CreateLesson extends PureComponent {
       titleValue: '',
       tekstFields: [],
       tekstFieldsValue: [],
+      videoFields: [],
     }
 
     this.handleNumber = this.handleNumber.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
     this.addTextField = this.addTextField.bind(this)
+    this.addVideoField = this.addVideoField.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -40,11 +42,28 @@ export class CreateLesson extends PureComponent {
         })
   }
 
+  handleVideoField(thisId, event) {
+        var newVideoFieldsValues = this.state.videoFieldsValue
+        newVideoFieldsValues[thisId -1] = event.target.value
+        this.setState({
+          videoFieldsValue: newVideoFieldsValues
+        })
+  }
+
   addTextField() {
     let thisId = this.state.tekstFields.length + 1
     this.setState({
       tekstFields: this.state.tekstFields.concat(<div className="input" key={thisId}>
-        <input type="text" placeholder="Tekst" value={this.state.tekstFields[thisId]} key={thisId} onChange={this.handleTekstField.bind(this, thisId)} />
+        <textarea placeholder="Tekst" value={this.state.tekstFields[thisId]} key={thisId} onChange={this.handleTekstField.bind(this, thisId)} />
+      </div>)
+    })
+  }
+
+  addVideoField() {
+    let thisId = this.state.videoFields.length + 1
+    this.setState({
+      videoFields: this.state.videoFields.concat(<div className="input" key={thisId}>
+        <input type="text" placeholder="Vimeo ID" value={this.state.videoFields[thisId]} key={thisId} onChange={this.handleTekstField.bind(this, thisId)} />
       </div>)
     })
   }
@@ -56,6 +75,7 @@ export class CreateLesson extends PureComponent {
       lessonNumber: this.state.numberValue,
       title: this.state.titleValue,
       tekst: this.state.tekstFieldsValue,
+      video: this.state.videoFieldsValue,
     }
     this.props.newLesson(lesson)
   }
@@ -63,6 +83,7 @@ export class CreateLesson extends PureComponent {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <h1>Nieuwe les</h1>
         <div className="lessonGeneral">
           <div className="input">
             <input value={this.state.number} onChange={this.handleNumber} type="number" placeholder="Number" />
@@ -72,12 +93,20 @@ export class CreateLesson extends PureComponent {
           </div>
         </div>
         <div className="lessonDetails">
+          <h2>Tekstblokken</h2>
           {this.state.tekstFields.map((Element, index) => {
             return Element
           })}
-          <span onClick={ this.addTextField }>Add</span>
+          <span onClick={ this.addTextField }>Toevoegen</span>
         </div>
-        <input type="submit" value="Toevoegen" />
+        <div className="lessonDetails">
+          <h2>Video's</h2>
+          {this.state.videoFields.map((Element, index) => {
+            return Element
+          })}
+          <span onClick={ this.addVideoField }>Toevoegen</span>
+        </div>
+        <input type="submit" value="Aanmaken" />
       </form>
     );
   }
