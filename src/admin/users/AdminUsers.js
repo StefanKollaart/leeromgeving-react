@@ -8,7 +8,8 @@ class AdminUsers extends PureComponent {
       <div>
         <h1>Gebruikers</h1>
         <ul>
-          <li><Link to="/admin/users/sign-up">Nieuwe gebruiker</Link></li>
+          <li><Link to="/admin/sign-up">Nieuwe gebruiker</Link></li>
+          <li><Link to="/admin/users/all">Bewerk gebruikers</Link></li>
         </ul>
       </div>
     )

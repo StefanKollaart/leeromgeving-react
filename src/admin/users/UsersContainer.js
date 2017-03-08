@@ -24,7 +24,9 @@ class UsersContainer extends PureComponent {
         </header>
 
         <main>
-          {this.props.users.map(this.renderUsers)}
+          <ul>
+            {this.props.users.map(this.renderUsers)}
+          </ul>
         </main>
       </div>
     )

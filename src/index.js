@@ -35,8 +35,7 @@ ReactDOM.render(
         <Route path="/admin/users" component={AdminUsers} />
         <Route path="/admin/users/all" component={UsersContainer} />
         <Route path="/admin/users/:userId" component={EditUser} />
-        <Route path="/admin/users/sign-up" component={SignUp} />
-        <Route path="/admin/users/edit" component={EditUser} />
+        <Route path="/admin/sign-up" component={SignUp} />
         <Route path="/admin/lessons" component={AdminLessons} />
         <Route path="/admin/lessons/create" component={CreateLesson} />
       </Route>

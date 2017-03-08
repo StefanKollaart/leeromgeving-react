@@ -13,9 +13,7 @@ class UserItem extends PureComponent {
     const { _id, first_name, last_name, email, groups } = this.props
 
     return (
-      <article className = "Lesson">
-        <h1><Link to={`/admin/users/${_id}`}>{first_name} { last_name }</Link></h1>
-      </article>
+        <li><Link to={`/admin/users/${_id}`}>{first_name} { last_name }</Link></li>
     )
   }
 }

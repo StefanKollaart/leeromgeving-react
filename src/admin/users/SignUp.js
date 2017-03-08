@@ -13,7 +13,7 @@ export class SignUp extends PureComponent {
     if (this.validateAll()) {
       const user = {
         first_name: this.refs.firstname.value,
-        last_name: this.refs.firstname.value,
+        last_name: this.refs.lastname.value,
         email: this.refs.email.value,
         password: this.refs.password.value
       }
