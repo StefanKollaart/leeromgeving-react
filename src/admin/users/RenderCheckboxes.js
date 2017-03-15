@@ -1,8 +1,8 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-class RenderCheckboxes extends PureComponent {
+class RenderCheckboxes extends Component {
   constructor(props) {
     super(props)
     if (this.state == null) {
@@ -11,14 +11,15 @@ class RenderCheckboxes extends PureComponent {
           isChecked: false,
         }
       } else {
-        for(var i = 0; i < this.props.userGroups.length; i++) {
+        for (var i = 0; i < this.props.userGroups.length; i++) {
           if(this.props.userGroups[i].courseId == this.props.courseId && this.props.userGroups[i].year == this.props.year && this.props.userGroups[i].day == this.props.day) {
             this.state = {
-              isChecked: true,
+              isChecked: true
             }
+            break;
           } else {
             this.state = {
-              isChecked: false,
+              isChecked: false
             }
           }
         }

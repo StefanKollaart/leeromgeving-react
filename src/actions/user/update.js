@@ -8,10 +8,8 @@ export default (user) => {
   return (dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      console.log("In here")
-      users.patch(user._id, { email: user.email, first_name: user.first_name, last_name: user.last_name, groups: user.groups })
+      users.update(user._id, { $set: { email: user.email, first_name: user.first_name, last_name: user.last_name, groups: user.groups }})
       .then((response) => {
-        console.log("in hereee!")
         console.log(response)
         dispatch({ type: UPDATED_USER, payload: response })
       })

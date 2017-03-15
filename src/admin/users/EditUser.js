@@ -1,11 +1,11 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import editUser from '../../actions/user/update'
 import fetchUsers from '../../actions/user/fetch'
 import fetchGroups from '../../actions/groups/fetch'
 import RenderCheckboxes from './RenderCheckboxes'
 
-export class EditUser extends PureComponent {
+export class EditUser extends Component {
   componentWillMount() {
     this.props.fetchUsers()
     this.props.fetchGroups()
