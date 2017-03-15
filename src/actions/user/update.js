@@ -9,8 +9,7 @@ export default (user) => {
     api.app.authenticate()
     .then((authResult) => {
       console.log("In here")
-      debugger
-      users.patch(user._id, { email: user.email, first_name: user.first_name, last_name: user.last_name })
+      users.update(user._id, { email: user.email, first_name: user.first_name, last_name: user.last_name, groups: user.groups })
       .then((response) => {
         console.log("in hereee!")
         dispatch({ type: USER_SIGNED_UP })

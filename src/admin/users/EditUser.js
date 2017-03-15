@@ -13,6 +13,7 @@ export class EditUser extends PureComponent {
     this.handleLastName = this.handleLastName.bind(this)
     this.handleEmail = this.handleEmail.bind(this)
     this.renderCheckboxes = this.renderCheckboxes.bind(this)
+    this.handleGroups = this.handleGroups.bind(this)
   }
 
   loadEditUser() {
@@ -21,11 +22,12 @@ export class EditUser extends PureComponent {
         first_name: this.props.first_name,
         last_name: this.props.last_name,
         email: this.props.email,
+        groups: this.props.groups,
       }
   }
 
   renderCheckboxes(checkbox, index) {
-    return <RenderCheckboxes key={index} checkBoxId={index} userGroups={this.props.groups} {...checkbox} />
+    return <RenderCheckboxes key={index} checkBoxId={index} userGroups={this.props.groups} {...checkbox} handleGroups={this.handleGroups} />
   }
 
   handleFirstName(event) {
@@ -46,6 +48,27 @@ export class EditUser extends PureComponent {
     });
   }
 
+  handleGroups(changedGroup, isChecked) {
+    var newGroups = this.state.groups
+    var fullGroup = this.props.allGroups.find(function(group) {
+      return group.courseId == changedGroup.courseId && group.day == changedGroup.day && group.year == changedGroup.year
+    })
+    if(isChecked) {
+      newGroups.push(fullGroup)
+    } else {
+      newGroups = this.state.groups.filter(function(group) {
+        if (group.day != fullGroup.day || group.year != fullGroup.year || group.courseId != fullGroup.courseId) {
+          return true
+        } else {
+          return false
+        }
+      })
+    }
+    this.setState({
+      groups: newGroups
+    })
+  }
+
   submitForm(event) {
     event.preventDefault()
       const user = {
@@ -53,6 +76,7 @@ export class EditUser extends PureComponent {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
+        groups: this.state.groups,
       }
       this.props.editUser(user)
   }
@@ -85,7 +109,6 @@ export class EditUser extends PureComponent {
       )
     }
   }
-  debugger
 }
 
 const mapStateToProps = ({ users, groups }, { params }) => {

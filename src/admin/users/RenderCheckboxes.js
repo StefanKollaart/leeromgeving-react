@@ -5,15 +5,22 @@ import { Link } from 'react-router'
 class RenderCheckboxes extends PureComponent {
   constructor(props) {
     super(props)
-    debugger
-    for(var i = 0; i < this.props.userGroups.length; i++) {
-      if(this.props.userGroups[i].courseId == this.props.courseId && this.props.userGroups[i].year == this.props.year && this.props.userGroups[i].day == this.props.day) {
-        this.state = {
-          isChecked: true,
-        }
-      } else {
+    if (this.state == null) {
+      if(this.props.userGroups.length == 0) {
         this.state = {
           isChecked: false,
+        }
+      } else {
+        for(var i = 0; i < this.props.userGroups.length; i++) {
+          if(this.props.userGroups[i].courseId == this.props.courseId && this.props.userGroups[i].year == this.props.year && this.props.userGroups[i].day == this.props.day) {
+            this.state = {
+              isChecked: true,
+            }
+          } else {
+            this.state = {
+              isChecked: false,
+            }
+          }
         }
       }
     }
@@ -23,9 +30,16 @@ class RenderCheckboxes extends PureComponent {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(event) {
+  handleClick() {
     this.setState({
       isChecked: !this.state.isChecked
+    }, function() {
+      let changedGroup = {
+        year: this.props.year,
+        day: this.props.day,
+        courseId: this.props.courseId
+      }
+      this.props.handleGroups(changedGroup, this.state.isChecked)
     })
   }
 
