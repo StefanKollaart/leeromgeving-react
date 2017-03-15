@@ -9,6 +9,7 @@ class AdminLessons extends PureComponent {
         <h1>Lessen</h1>
         <ul>
           <li><Link to="/admin/lessons/create">Nieuwe les</Link></li>
+          <li><Link to="/admin/lessons/all">Bewerk lessen</Link></li>
         </ul>
       </div>
     )

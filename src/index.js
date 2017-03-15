@@ -15,6 +15,8 @@ import Admindex from './admin/Admindex'
 
 import AdminLessons from './admin/lessons/AdminLessons'
 import CreateLesson from './admin/lessons/CreateLesson'
+import AdminLessonsContainer from './admin/lessons/LessonsContainer'
+import EditLesson from './admin/lessons/EditLesson'
 
 import AdminUsers from './admin/users/AdminUsers'
 import SignUp from './admin/users/SignUp'
@@ -39,6 +41,8 @@ ReactDOM.render(
         <Route path="/admin/users/:userId" component={EditUser} />
         <Route path="/admin/sign-up" component={SignUp} />
         <Route path="/admin/lessons" component={AdminLessons} />
+        <Route path="/admin/lessons/all" component={AdminLessonsContainer} />
+        <Route path="/admin/lessons/:lessonId" component={EditLesson} />
         <Route path="/admin/lessons/create" component={CreateLesson} />
         <Route path="/admin/groups" component={AdminGroups} />
         <Route path="/admin/groups/create" component={CreateGroup} />
