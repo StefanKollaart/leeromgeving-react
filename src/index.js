@@ -43,7 +43,7 @@ ReactDOM.render(
         <Route path="/admin/lessons" component={AdminLessons} />
         <Route path="/admin/lessons/all" component={AdminLessonsContainer} />
         <Route path="/admin/lessons/:lessonId" component={EditLesson} />
-        <Route path="/admin/lessons/create" component={CreateLesson} />
+        <Route path="/admin/create-lesson" component={CreateLesson} />
         <Route path="/admin/groups" component={AdminGroups} />
         <Route path="/admin/groups/create" component={CreateGroup} />
       </Route>
