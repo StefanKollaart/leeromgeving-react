@@ -10,59 +10,12 @@ export class SignUp extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
-    if (this.validateAll()) {
       const user = {
         first_name: this.refs.firstname.value,
         last_name: this.refs.lastname.value,
         email: this.refs.email.value,
-        password: this.refs.password.value
       }
       this.props.signUp(user)
-    }
-  }
-
-  validateAll() {
-    return this.validatePassword() &&
-      this.validatePasswordConfirmation()
-  }
-
-  validatePassword() {
-    const { password, passwordConfirmation } = this.refs
-
-    if (password.value.length < 6) {
-      this.setState({
-        passwordError: 'Wachtwoord is te kort'
-      })
-      return false
-    }
-
-    if (password.value.match(/[a-zA-Z]+/) && password.value.match(/[0-9]+/)) {
-      this.setState({
-        passwordError: null
-      })
-      return true
-    }
-
-    this.setState({
-      passwordError: 'Het wachtwoord moet zowel letters als nummers bevatten'
-    })
-    return false
-  }
-
-  validatePasswordConfirmation() {
-    const { password, passwordConfirmation } = this.refs
-
-    if (password.value === passwordConfirmation.value) {
-      this.setState({
-        passwordConfirmationError: null
-      })
-      return true
-    }
-
-    this.setState({
-      passwordConfirmationError: 'Wachtwoorden zijn niet gelijk'
-    })
-    return false
   }
 
   render() {
@@ -84,25 +37,6 @@ export class SignUp extends PureComponent {
               <li>
                 <label>E-mail <span className="required">*</span></label>
                 <input ref="email" type="text" placeholder="E-mail" className="field-long"/>
-              </li>
-              <li>
-                <label>Wachtwoord <span className="required">*</span></label>
-                <input ref="password" type="password" placeholder="Wachtwoord"
-                  onChange={this.validatePassword.bind(this)} className="field-long"/>
-                { this.state.passwordError ?
-                  <p className="formError">{ this.state.passwordError }</p> :
-                  null
-                }
-              </li>
-              <li>
-                <label>Wachtwoord (opnieuw)<span className="required">*</span></label>
-                <input ref="passwordConfirmation" type="password" placeholder="Wachtwoord"
-                  onKeyUp={this.validatePasswordConfirmation.bind(this)}
-                  onChange={this.validatePasswordConfirmation.bind(this)} className="field-long"/>
-                { this.state.passwordConfirmationError ?
-                  <p className="formError">{ this.state.passwordConfirmationError }</p> :
-                  null
-                }
               </li>
             </div>
             <input type="submit" value="Aanmaken" />

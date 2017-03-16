@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import TekstInput from './fields/TekstInput'
 import fetchLessons from '../../actions/lessons/fetch'
-import VideoFields from './VideoFields'
+import ContentFields from './ContentFields'
 import TekstFields from './TekstFields'
 import update from '../../actions/lessons/update'
 
@@ -17,10 +17,9 @@ export class EditLesson extends Component {
     this.addTekstField = this.addTekstField.bind(this)
     this.removeVideo = this.removeVideo.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.renderVideoFields = this.renderVideoFields.bind(this)
+    this.renderContent = this.renderContent.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
-    this.renderTekst = this.renderTekst.bind(this)
   }
 
   loadEditLesson() {
@@ -28,8 +27,7 @@ export class EditLesson extends Component {
       this.state = {
         lessonNumber: this.props.lessonNumber,
         title: this.props.title,
-        video: this.props.video,
-        tekst: this.props.tekst,
+        content: this.props.content,
       }
     }
   }
@@ -55,28 +53,23 @@ export class EditLesson extends Component {
   }
 
   removeVideo(index) {
-    var newVideos = this.state.video
-    newVideos.splice(index, 1)
+    var newContent = this.state.content
+    newContent.splice(index, 1)
     this.setState({
-      video: newVideos
-    })
-    debugger
-  }
-
-  handleTekst(index, event) {
-    var newTekst = this.state.tekst
-    newTekst[index] = event.target.value
-    this.setState({
-      tekst: newTekst
+      content: newContent
     })
   }
 
-  renderVideoFields(video, index) {
-    return <VideoFields key={index} video={video} id={index} handleVideo={this.handleVideo} removeVideo={this.removeVideo} />
+  handleTekst(index, value) {
+    var newContent = this.state.content
+    newContent[index].content = value
+    this.setState({
+      content: newContent
+    })
   }
 
-  renderTekst(tekst, index) {
-    return <TekstFields key={index} tekst={tekst} id={index} handleTekst={this.handleTekst} />
+  renderContent(content, index) {
+    return <ContentFields key={index} {...content} id={index} handleVideo={this.handleVideo} removeVideo={this.removeVideo} handleTekst={this.handleTekst} />
   }
 
   addVideoField() {
@@ -101,9 +94,9 @@ export class EditLesson extends Component {
       _id: this.props._id,
       lessonNumber: this.state.lessonNumber,
       title: this.state.title,
-      video: this.state.video,
-      tekst: this.state.tekst,
+      content: this.state.content
     }
+    debugger
     this.props.update(lesson)
   }
 
@@ -128,14 +121,8 @@ export class EditLesson extends Component {
                 </li>
               </div>
               <div className="lessonDetails">
-                <h2>Video's</h2>
-                {this.state.video.map(this.renderVideoFields)}
-                <span onClick={ this.addVideoField }>+</span>
-              </div>
-              <div className="lessonDetails">
-                <h2>Tekst</h2>
-                {this.state.tekst.map(this.renderTekst)}
-                <span onClick={ this.addTekstField }>+</span>
+                <h2>Content</h2>
+                {this.state.content.map(this.renderContent)}
               </div>
               <input type="submit" value="Opslaan" />
             </ul>

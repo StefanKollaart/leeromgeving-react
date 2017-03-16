@@ -10,6 +10,7 @@ import LessonsContainer from './lessons/LessonsContainer'
 import LessonPage from './lessons/LessonPage'
 
 import SignIn from './users/SignIn'
+import SetPassword from './users/SetPassword'
 
 import Admindex from './admin/Admindex'
 
@@ -29,6 +30,7 @@ import CreateGroup from './admin/groups/CreateGroup'
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
+      <Route path="/setpassword/:tokenId" component={SetPassword} />
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
         <Route path="/lessons/:lessonId" component={LessonPage} />

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import newLesson from '../../actions/lessons/new-lesson'
-import VideoFields from './VideoFields'
+// import VideoFields from './VideoFields'
 import TekstFields from './TekstFields'
 
 export class CreateLesson extends Component {
@@ -61,9 +61,9 @@ export class CreateLesson extends Component {
     })
   }
 
-  renderVideoFields(video, index) {
-    return <VideoFields key={index} video={video} id={index} removeVideo={this.removeVideo} handleVideo={this.handleVideo} />
-  }
+  // renderVideoFields(video, index) {
+  //   return <VideoFields key={index} video={video} id={index} removeVideo={this.removeVideo} handleVideo={this.handleVideo} />
+  // }
 
   renderTekst(tekst, index) {
     return <TekstFields key={index} tekst={tekst} id={index} handleTekst={this.handleTekst} />

@@ -8,11 +8,11 @@ export class LessonPage extends PureComponent {
   static propTypes = {}
 
   renderTekst(tekst, index) {
-    return <TekstItem tekst = {tekst} />
+    return <TekstItem tekst = {tekst} key={index} />
   }
 
   renderVideo(video, index) {
-    return <VideoItem video = {video} />
+    return <VideoItem video = {video} key={index} />
   }
 
   componentDidMount() {
