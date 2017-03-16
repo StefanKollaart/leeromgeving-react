@@ -15,6 +15,7 @@ export class EditLesson extends Component {
     this.handleTitle = this.handleTitle.bind(this)
     this.addVideoField = this.addVideoField.bind(this)
     this.addTekstField = this.addTekstField.bind(this)
+    this.removeVideo = this.removeVideo.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderVideoFields = this.renderVideoFields.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
@@ -53,6 +54,14 @@ export class EditLesson extends Component {
     })
   }
 
+  removeVideo(index) {
+    var newVideos = this.state.video
+    newVideos.splice(index - 1, 1)
+    this.setState({
+      video: newVideos
+    })
+  }
+
   handleTekst(index, event) {
     var newTekst = this.state.tekst
     newTekst[index] = event.target.value
@@ -62,7 +71,7 @@ export class EditLesson extends Component {
   }
 
   renderVideoFields(video, index) {
-    return <VideoFields key={index} video={video} id={index} handleVideo={this.handleVideo} />
+    return <VideoFields key={index} video={video} id={index} handleVideo={this.handleVideo} removeVideo={this.removeVideo} />
   }
 
   renderTekst(tekst, index) {
@@ -88,6 +97,7 @@ export class EditLesson extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const lesson = {
+      _id: this.props._id,
       lessonNumber: this.state.lessonNumber,
       title: this.state.title,
       video: this.state.video,

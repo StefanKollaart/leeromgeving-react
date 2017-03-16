@@ -17,32 +17,24 @@ class VideoFields extends Component {
   }
 
   componentWillMount() {
-    this.videoPreview = this.videoPreview.bind(this)
+    this.handleVideo = this.handleVideo.bind(this)
   }
 
-  videoPreview(event) {
+
+  handleVideo(index, event) {
     this.setState({
       video: event.target.value
-    }, function() {
-      if(this.state.video.length > 0) {
-        this.setState({
-          videoPreview: this.state.video
-        })
-      } else {
-        this.setState({
-          videoPreview: undefined
-        })
-      }
     })
+    this.props.handleVideo(index, event)
   }
 
   render() {
     return(
       <li>
-        <label>Video {this.props.id + 1}</label>
-        {this.state.videoPreview ? <iframe className="vimeo" src={"https://player.vimeo.com/video/" + this.state.videoPreview} width="640" height="360" allowFullScreen>
+        <label>Video {this.props.id + 1} - <span className="removeItem" onClick={() => {this.props.removeVideo(this.props.id)}}>Verwijder</span></label>
+        {this.state.video ? <iframe className="vimeo" src={"https://player.vimeo.com/video/" + this.state.video} width="640" height="360" allowFullScreen>
         </iframe>  : null }
-        <input type="text" placeholder="Vimeo ID" value={this.state.video} onChange={this.props.handleVideo.bind(this, this.props.id), this.videoPreview} className="field-long"/>
+        <input type="text" placeholder="Vimeo ID" value={this.state.video} onChange={this.handleVideo.bind(this, this.props.id)} className="field-long"/>
       </li>
     )
   }

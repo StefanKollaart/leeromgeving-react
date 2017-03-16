@@ -20,6 +20,7 @@ export class CreateLesson extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderVideoFields = this.renderVideoFields.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
+    this.removeVideo = this.handleVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
     this.renderTekst = this.renderTekst.bind(this)
   }
@@ -44,6 +45,15 @@ export class CreateLesson extends Component {
     })
   }
 
+  removeVideo(index) {
+    var newVideos = this.state.video
+    newVideos.splice(index)
+    debugger
+    this.setState({
+      video: newVideos
+    })
+  }
+
   handleTekst(index, event) {
     var newTekst = this.state.tekst
     newTekst[index] = event.target.value
@@ -53,7 +63,7 @@ export class CreateLesson extends Component {
   }
 
   renderVideoFields(video, index) {
-    return <VideoFields key={index} video={video} id={index} handleVideo={this.handleVideo} />
+    return <VideoFields key={index} video={video} id={index} removeVideo={this.removeVideo} handleVideo={this.handleVideo} />
   }
 
   renderTekst(tekst, index) {
