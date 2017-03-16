@@ -96,7 +96,7 @@ class RenderCheckboxes extends Component {
   render() {
     const { courseId, year, day, checkBoxId } = this.props
 
-    return(<div><input type="checkbox" checked={this.state.isChecked} onChange={this.handleClick} />{this.renderCourse(courseId)} - {year} - {this.renderDay(day)}</div>)
+    return(<li><input type="checkbox" checked={this.state.isChecked} onChange={this.handleClick} />{this.renderCourse(courseId)} - {year} - {this.renderDay(day)}</li>)
   }
 }
 

@@ -89,17 +89,25 @@ export class EditUser extends Component {
           <h1>{this.state.first_name} {this.state.last_name}</h1>
 
           <form onSubmit={this.submitForm.bind(this)}>
-            <div className="input">
-              <input type="text" placeholder="Voornaam" value={this.state.first_name} onChange={this.handleFirstName}/>
-            </div>
-            <div className="input">
-              <input type="text" placeholder="Achternaam" value={this.state.last_name} onChange={this.handleLastName}/>
-            </div>
-            <div className="input">
-              <input type="text" placeholder="E-mail" value={this.state.email} onChange={this.handleEmail}/>
-            </div>
-            {this.props.allGroups.map(this.renderCheckboxes)}
-            <input type="submit" value="Aanmaken" />
+            <ul className="form-style-1">
+              <div className="form-fields">
+                <li>
+                  <label>Voornaam <span className="required">*</span></label>
+                  <input type="text" placeholder="Voornaam" value={this.state.first_name} onChange={this.handleFirstName} className="field-long"/>
+                </li>
+                <li>
+                  <label>Achternaam <span className="required">*</span></label>
+                  <input type="text" placeholder="Achternaam" value={this.state.last_name} onChange={this.handleLastName} className="field-long"/>
+                </li>
+                <li>
+                  <label>E-mail <span className="required">*</span></label>
+                  <input type="text" placeholder="E-mail" value={this.state.email} onChange={this.handleEmail} className="field-long"/>
+                </li>
+                  <h2>Groepen</h2>
+                  {this.props.allGroups.map(this.renderCheckboxes)}
+              </div>
+              <input type="submit" value="Aanmaken" />
+            </ul>
           </form>
         </div>
       )

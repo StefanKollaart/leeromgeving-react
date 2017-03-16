@@ -8,7 +8,7 @@ class AdminGroups extends PureComponent {
       <div>
         <h1>Groepen</h1>
         <ul>
-          <li><Link to="/admin/groups/create">Nieuwe groep</Link></li>
+          <li><Link to="/admin/create-group">Nieuwe groep</Link></li>
         </ul>
       </div>
     )

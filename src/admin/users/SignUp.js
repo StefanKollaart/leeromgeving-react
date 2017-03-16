@@ -71,33 +71,42 @@ export class SignUp extends PureComponent {
         <h1>Nieuwe gebruiker</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
-          <div className="input">
-            <input ref="firstname" type="text" placeholder="Voornaam" />
-          </div>
-          <div className="input">
-            <input ref="lastname" type="text" placeholder="Achternaam" />
-          </div>
-          <div className="input">
-            <input ref="email" type="text" placeholder="E-mail" />
-          </div>
-          <div className="input">
-            <input ref="password" type="password" placeholder="Wachtwoord"
-              onChange={this.validatePassword.bind(this)} />
-            { this.state.passwordError ?
-              <p className="formError">{ this.state.passwordError }</p> :
-              null
-            }
-          </div>
-          <div className="input">
-            <input ref="passwordConfirmation" type="password" placeholder="Wachtwoord"
-              onKeyUp={this.validatePasswordConfirmation.bind(this)}
-              onChange={this.validatePasswordConfirmation.bind(this)} />
-            { this.state.passwordConfirmationError ?
-              <p className="formError">{ this.state.passwordConfirmationError }</p> :
-              null
-            }
-          </div>
-          <input type="submit" value="Aanmaken" />
+          <ul className="form-style-1">
+            <div className="form-fields">
+              <li>
+                <label>Voornaam <span className="required">*</span></label>
+                <input ref="firstname" type="text" placeholder="Voornaam" className="field-long" />
+              </li>
+              <li>
+                <label>Achternaam <span className="required">*</span></label>
+                <input ref="lastname" type="text" placeholder="Achternaam" className="field-long" />
+              </li>
+              <li>
+                <label>E-mail <span className="required">*</span></label>
+                <input ref="email" type="text" placeholder="E-mail" className="field-long"/>
+              </li>
+              <li>
+                <label>Wachtwoord <span className="required">*</span></label>
+                <input ref="password" type="password" placeholder="Wachtwoord"
+                  onChange={this.validatePassword.bind(this)} className="field-long"/>
+                { this.state.passwordError ?
+                  <p className="formError">{ this.state.passwordError }</p> :
+                  null
+                }
+              </li>
+              <li>
+                <label>Wachtwoord (opnieuw)<span className="required">*</span></label>
+                <input ref="passwordConfirmation" type="password" placeholder="Wachtwoord"
+                  onKeyUp={this.validatePasswordConfirmation.bind(this)}
+                  onChange={this.validatePasswordConfirmation.bind(this)} className="field-long"/>
+                { this.state.passwordConfirmationError ?
+                  <p className="formError">{ this.state.passwordConfirmationError }</p> :
+                  null
+                }
+              </li>
+            </div>
+            <input type="submit" value="Aanmaken" />
+          </ul>
         </form>
       </div>
     )

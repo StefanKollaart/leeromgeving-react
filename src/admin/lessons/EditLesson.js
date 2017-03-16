@@ -102,28 +102,34 @@ export class EditLesson extends Component {
         {this.loadEditLesson()}
       }
         return (
-        <form onSubmit={this.handleSubmit}>
+        <div>
           <h1>{this.state.title}</h1>
-          <div className="lessonGeneral">
-            <div className="input">
-              <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
-            </div>
-            <div className="input">
-              <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
-            </div>
-          </div>
-          <div className="lessonDetails">
-            <h2>Video's</h2>
-            {this.state.video.map(this.renderVideoFields)}
-            <span onClick={ this.addVideoField }>Toevoegen</span>
-          </div>
-          <div className="lessonDetails">
-            <h2>Tekst</h2>
-            {this.state.tekst.map(this.renderTekst)}
-            <span onClick={ this.addTekstField }>Toevoegen</span>
-          </div>
-          <input type="submit" value="Opslaan" />
-        </form>
+          <form onSubmit={this.handleSubmit}>
+            <ul className="form-style-1">
+              <div className="lessonGeneral">
+                <li>
+                  <label>Lesnummer <span className="required">*</span></label>
+                  <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
+                </li>
+                <li>
+                  <label>Titel <span className="required">*</span></label>
+                  <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
+                </li>
+              </div>
+              <div className="lessonDetails">
+                <h2>Video's</h2>
+                {this.state.video.map(this.renderVideoFields)}
+                <span onClick={ this.addVideoField }>+</span>
+              </div>
+              <div className="lessonDetails">
+                <h2>Tekst</h2>
+                {this.state.tekst.map(this.renderTekst)}
+                <span onClick={ this.addTekstField }>+</span>
+              </div>
+              <input type="submit" value="Opslaan" />
+            </ul>
+          </form>
+        </div>
       )
     } else {
       return <div></div>
