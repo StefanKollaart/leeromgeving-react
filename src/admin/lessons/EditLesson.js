@@ -56,10 +56,11 @@ export class EditLesson extends Component {
 
   removeVideo(index) {
     var newVideos = this.state.video
-    newVideos.splice(index - 1, 1)
+    newVideos.splice(index, 1)
     this.setState({
       video: newVideos
     })
+    debugger
   }
 
   handleTekst(index, event) {
