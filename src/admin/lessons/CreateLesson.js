@@ -20,7 +20,7 @@ export class CreateLesson extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderVideoFields = this.renderVideoFields.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
-    this.removeVideo = this.handleVideo.bind(this)
+    this.removeVideo = this.removeVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
     this.renderTekst = this.renderTekst.bind(this)
   }
@@ -47,8 +47,7 @@ export class CreateLesson extends Component {
 
   removeVideo(index) {
     var newVideos = this.state.video
-    newVideos.splice(index)
-    debugger
+    newVideos.splice(index, 1)
     this.setState({
       video: newVideos
     })
