@@ -10,19 +10,10 @@ export class CreateLesson extends Component {
     this.state = {
       lessonNumber: '',
       title: '',
-      video: [],
-      tekst: [],
     }
     this.handleNumber = this.handleNumber.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
-    this.addVideoField = this.addVideoField.bind(this)
-    this.addTekstField = this.addTekstField.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.renderVideoFields = this.renderVideoFields.bind(this)
-    this.handleVideo = this.handleVideo.bind(this)
-    this.removeVideo = this.removeVideo.bind(this)
-    this.handleTekst = this.handleTekst.bind(this)
-    this.renderTekst = this.renderTekst.bind(this)
   }
 
   handleNumber(event) {
@@ -37,61 +28,11 @@ export class CreateLesson extends Component {
     });
   }
 
-  handleVideo(index, event) {
-    var newVideos = this.state.video
-    newVideos[index] = event.target.value
-    this.setState({
-      video: newVideos
-    })
-  }
-
-  removeVideo(index) {
-    var newVideos = this.state.video
-    newVideos.splice(index, 1)
-    this.setState({
-      video: newVideos
-    })
-  }
-
-  handleTekst(index, event) {
-    var newTekst = this.state.tekst
-    newTekst[index] = event.target.value
-    this.setState({
-      tekst: newTekst
-    })
-  }
-
-  // renderVideoFields(video, index) {
-  //   return <VideoFields key={index} video={video} id={index} removeVideo={this.removeVideo} handleVideo={this.handleVideo} />
-  // }
-
-  renderTekst(tekst, index) {
-    return <TekstFields key={index} tekst={tekst} id={index} handleTekst={this.handleTekst} />
-  }
-
-  addVideoField() {
-    var newVideos = this.state.video
-    newVideos.push("")
-    this.setState({
-      video: newVideos
-    })
-  }
-
-  addTekstField() {
-    var newTekst = this.state.tekst
-    newTekst.push("")
-    this.setState({
-      tekst: newTekst
-    })
-  }
-
   handleSubmit(event) {
     event.preventDefault()
     const lesson = {
       lessonNumber: this.state.lessonNumber,
       title: this.state.title,
-      video: this.state.video,
-      tekst: this.state.tekst,
     }
     this.props.newLesson(lesson)
   }
@@ -111,16 +52,6 @@ export class CreateLesson extends Component {
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" className="field-long"/>
                 </li>
-              </div>
-              <div className="lessonDetails">
-                <h2>Video's</h2>
-                {this.state.video.map(this.renderVideoFields)}
-                <span onClick={ this.addVideoField }>+</span>
-              </div>
-              <div className="lessonDetails">
-                <h2>Tekst</h2>
-                {this.state.tekst.map(this.renderTekst)}
-                <span onClick={ this.addTekstField }>+</span>
               </div>
             <input type="submit" value="Opslaan" />
             </ul>

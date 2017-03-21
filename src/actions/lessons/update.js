@@ -11,7 +11,6 @@ export default (lesson) => {
     .then((authResult) => {
       lessons.patch(lesson._id, { lessonNumber: lesson.lessonNumber, title: lesson.title, content: lesson.content })
       .then((response) => {
-        debugger
         dispatch({ type: UPDATED_LESSON, payload: response })
         history.push(`/admin/lessons/all`)
       }).catch((error) => {

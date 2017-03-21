@@ -15,7 +15,7 @@ export class EditLesson extends Component {
     this.handleTitle = this.handleTitle.bind(this)
     this.addVideoField = this.addVideoField.bind(this)
     this.addTekstField = this.addTekstField.bind(this)
-    this.removeVideo = this.removeVideo.bind(this)
+    this.removeItem = this.removeItem.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderContent = this.renderContent.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
@@ -45,16 +45,8 @@ export class EditLesson extends Component {
   }
 
   handleVideo(index, event) {
-    var newVideos = this.state.video
-    newVideos[index] = event.target.value
-    this.setState({
-      video: newVideos
-    })
-  }
-
-  removeVideo(index) {
     var newContent = this.state.content
-    newContent.splice(index, 1)
+    newContent[index].content = event.target.value
     this.setState({
       content: newContent
     })
@@ -68,23 +60,31 @@ export class EditLesson extends Component {
     })
   }
 
+  removeItem(index) {
+    var newContent = this.state.content
+    newContent.splice(index, 1)
+    this.setState({
+      content: newContent
+    })
+  }
+
   renderContent(content, index) {
-    return <ContentFields key={index} {...content} id={index} handleVideo={this.handleVideo} removeVideo={this.removeVideo} handleTekst={this.handleTekst} />
+    return <ContentFields key={index} {...content} id={index} handleVideo={this.handleVideo} removeItem={this.removeItem} handleTekst={this.handleTekst} />
   }
 
   addVideoField() {
-    var newVideos = this.state.video
-    newVideos.push("")
+    var newContent = this.state.content
+    newContent.push({type: 1, order: this.state.content.length + 1, content: ""})
     this.setState({
-      video: newVideos
+      content: newContent
     })
   }
 
   addTekstField() {
-    var newTekst = this.state.tekst
-    newTekst.push("")
+    var newContent = this.state.content
+    newContent.push({type: 2, order: this.state.content.length + 1, content: ""})
     this.setState({
-      tekst: newTekst
+      content: newContent
     })
   }
 
@@ -96,7 +96,6 @@ export class EditLesson extends Component {
       title: this.state.title,
       content: this.state.content
     }
-    debugger
     this.props.update(lesson)
   }
 
@@ -122,6 +121,8 @@ export class EditLesson extends Component {
               </div>
               <div className="lessonDetails">
                 <h2>Content</h2>
+                <h3><a onClick={this.addTekstField}>Voeg tekst toe</a></h3>
+                <h3><a onClick={this.addVideoField}>Voeg video toe</a></h3>
                 {this.state.content.map(this.renderContent)}
               </div>
               <input type="submit" value="Opslaan" />
