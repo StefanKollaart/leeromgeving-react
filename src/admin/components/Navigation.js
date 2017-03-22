@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import signOut from '../../actions/user/sign-out'
 
+
 export class Adminnavigation extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
@@ -16,16 +17,12 @@ export class Adminnavigation extends PureComponent {
   render() {
     const { signedIn } = this.props
     return (
-      <nav className="navigation">
-        <ul>
+      <nav className="menubar">
           <li><Link to="/admin/users">Gebruikers</Link></li>
           <li><Link to="/admin/groups">Groepen</Link></li>
           <li><Link to="/admin/lessons">Lessen</Link></li>
-          <div className="nav-actions">
-            <li><Link to="/">Leeromgeving</Link></li>
-            <li><a href="#" onClick={this.signOut.bind(this)}>Log uit</a></li>
-          </div>
-        </ul>
+          <li><Link to="/">Leeromgeving</Link></li>
+          <li><a href="#" onClick={this.signOut.bind(this)}>Log uit</a></li>
       </nav>
     )
   }

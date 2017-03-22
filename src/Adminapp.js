@@ -15,8 +15,10 @@ class Adminapp extends React.Component {
 
     if(isAdmin) {
       return (
-        <div className="app">
-          <Navigation />
+        <div id="wrapper">
+          <header id="header" className="alt">
+            <Navigation />
+          </header>
           <div className="content">
             {this.props.children}
           </div>
@@ -35,7 +37,8 @@ class Adminapp extends React.Component {
 }
 
 const mapStateToProps = ({ currentUser }) => ({
-  isAdmin: (currentUser && currentUser.admin == true)
+  isAdmin: (currentUser && currentUser.admin == true),
+  userName: (currentUser.first_name)
 })
 
 export default connect(mapStateToProps, { SignIn })(Adminapp)

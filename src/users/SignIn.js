@@ -21,22 +21,40 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
-      <div className="sign-in form">
-        <Brand />
-        <h1>Log in</h1>
+      <section id="banner" className="major">
+        <div className="inner">
+          <header className="major">
+            <h1>Welkom bij Kollaart Opleidingen!</h1>
+            <h2>Wie ben je?</h2>
+          </header>
 
-        <form onSubmit={this.submitForm.bind(this)}>
-          <div className="input">
-            <input ref="email" type="email" placeholder="Email address"/>
+          <form onSubmit={this.submitForm.bind(this)}>
+            <div class="row uniform">
+              <div class="6u 12u$(xsmall)">
+                <input ref="email" type="email" placeholder="E-mail"/>
+              </div>
+              <div class="6u$ 12u$(xsmall)">
+                <input ref="password" type="password" placeholder="Wachtwoord" />
+              </div>
+            <input type="submit" value="Inloggen" />
           </div>
-          <div className="input">
-            <input ref="password" type="password" placeholder="Password" />
-          </div>
-          <input type="submit" value="Inloggen" />
         </form>
       </div>
+    </section>
     )
   }
 }
+
+{/* <section id="banner" className="major">
+  <div className="inner">
+    <header className="major">
+      <h1>{this.getGreeting()}, {userName}</h1>
+      <h2>{this.getMessage()}</h2>
+    </header>
+    <div className="content">
+      <p>Je was hiermee bezig [LES PLACEHOLDER]. <br/><br/><button>Verder gaan</button></p>
+    </div>
+  </div>
+</section> */}
 
 export default connect(null, { signIn })(SignIn)
