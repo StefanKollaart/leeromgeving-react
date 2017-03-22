@@ -1,18 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetchLessons from '../actions/lessons/fetch'
-import TekstItem from './TekstItem'
-import VideoItem from './VideoItem'
+import ContentItem from './ContentItem'
 
 export class LessonPage extends PureComponent {
   static propTypes = {}
 
-  renderTekst(tekst, index) {
-    return <TekstItem tekst = {tekst} key={index} />
-  }
-
-  renderVideo(video, index) {
-    return <VideoItem video = {video} key={index} />
+  renderItem(content, index) {
+    return <ContentItem content = {content} key={index} />
   }
 
   componentDidMount() {
@@ -20,18 +15,18 @@ export class LessonPage extends PureComponent {
   }
 
   render() {
-    const { title, video, tekst } = this.props
+    const { title, content } = this.props
 
     return(
-      <div className="lesson page">
+      <section className="panel banner right">
+        <div className="content color0 span-8">
         <h1>{ title }</h1>
 
-      <main>
-        {(tekst != undefined && tekst.map(this.renderTekst))}
-        {(video != undefined && video.map(this.renderVideo))}
-      </main>
-
-      </div>
+        <main>
+          {(content != undefined && content.map(this.renderItem))}
+        </main>
+        </div>
+      </section>
     )
   }
 }

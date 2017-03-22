@@ -18,15 +18,20 @@ class LessonsContainer extends PureComponent {
 
   render() {
     return(
-      <div className="lessons wrapper">
+      <section className="panel banner right">
+        <div className="content color0 span-3-75">
         <header>
-          <h1>Lessons</h1>
+          <h1 className="major">Lessons</h1>
         </header>
 
         <main>
           {this.props.lessons.map(this.renderLessons)}
         </main>
-      </div>
+        </div>
+        <div className="image filtered span-1-75" data-position="25% 25%">
+          <img src="http://i.imgur.com/fRw3gJl.jpg" alt="" />
+        </div>
+      </section>
     )
   }
 }

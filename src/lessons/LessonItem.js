@@ -10,11 +10,11 @@ class LessonItem extends PureComponent {
     tekst: PropTypes.array,
   }
   render() {
-    const { _id, lessonNumber, title, video, tekst } = this.props
+    const { _id, lessonNumber, title, content } = this.props
 
     return (
       <article className = "Lesson">
-        <h1><Link to={`/lessons/${_id}`}>{lessonNumber}. { title }</Link></h1>
+        <p><Link to={`/lessons/${_id}`}>{lessonNumber}. { title }</Link></p>
       </article>
     )
   }

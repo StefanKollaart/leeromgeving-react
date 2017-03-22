@@ -11,15 +11,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { signedIn } = this.props
+    const { signedIn, userName } = this.props
 
     if(signedIn) {
       return (
-        <div className="app">
-          <Navigation />
-          <div className="content">
-            {this.props.children}
-          </div>
+        <div id="wrapper">
+          <header id="header" className="alt">
+            <a href="index.html" className="logo"><strong>Kollaart Leeromgeving</strong></a> <span>{this.props.userName}</span>
+            <Navigation />
+          </header>
+          {this.props.children}
         </div>
       )
     } else {
@@ -35,7 +36,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id)
+  signedIn: (!!currentUser && !!currentUser._id),
+  userName: (currentUser.first_name)
 })
 
 export default connect(mapStateToProps, { SignIn })(App)

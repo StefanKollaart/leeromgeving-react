@@ -18,6 +18,11 @@
     text-decoration: none;
 }
 
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Change the link color to #111 (black) on hover */
 .navigation ul li a:hover {
     background-color: #111;

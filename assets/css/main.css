@@ -1,3 +1,4 @@
+@import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
 
 /*
@@ -3163,7 +3164,6 @@
 			height: inherit;
 			line-height: inherit;
 			padding: 0 1.5em;
-			overflow: auto;
 		}
 
 			#header .logo strong {
@@ -3407,7 +3407,7 @@
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		background-image: url("http://i.imgur.com/Nu5Z1L2.jpg");
+		background-image: url("../../images/banner.jpg");
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -3810,11 +3810,6 @@
 
 /* Menu */
 
-	.menubar {
-		list-style-type: none;
-		align-items: flex-start;
-	}
-
 	#menu {
 		-moz-transition: -moz-transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
 		-webkit-transition: -webkit-transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
@@ -3845,6 +3840,7 @@
 		padding: 3em 2em;
 		position: fixed;
 		top: 0;
+		visibility: hidden;
 		width: 100%;
 		z-index: 10002;
 	}
@@ -3887,8 +3883,6 @@
 
 				#menu ul.links > li {
 					padding: 0;
-					display: flex;
-					align-items: flex-end;
 				}
 
 					#menu ul.links > li > a:not(.button) {

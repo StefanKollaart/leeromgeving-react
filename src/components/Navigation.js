@@ -18,10 +18,8 @@ export class Navigation extends PureComponent {
   render() {
     const { signedIn, isAdmin } = this.props
     return (
-      <nav className="navigation">
-        <ul>
+      <nav className="menubar">
           <li><Link to="/">Home</Link></li>
-          <div className="nav-actions">
           <li>
             {(isAdmin && <Link to="/admin">Admin panel</Link>) }
           </li>
@@ -31,9 +29,7 @@ export class Navigation extends PureComponent {
               <div><Link to="/sign-in">Log in</Link></div>
             }
           </li>
-          </div>
-        </ul>
-      </nav>
+        </nav>
     )
   }
 }
