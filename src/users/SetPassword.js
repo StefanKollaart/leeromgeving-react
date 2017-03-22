@@ -1,83 +1,39 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import fetchUser from '../actions/user/fetch-user-token'
+import passwordUser from '../actions/user/password-user'
 
 export class SetPassword extends PureComponent {
+
   constructor() {
     super()
-    this.state = {}
-  }
 
-  componentWillMount() {
-    this.props.fetchUser(this.props.params.tokenId)
-  }
+    this.state = {
 
+    }
+  }
   submitForm(event) {
     event.preventDefault()
     if (this.validateAll()) {
       const user = {
-        name: this.refs.name.value,
-        email: this.refs.email.value,
-        password: this.refs.password.value
+        password: this.refs.password.value,
+        passwordToken: this.props.params.tokenId
       }
-      // this.props.signUp(user)
+      this.props.passwordUser(user)
     }
   }
 
   validateAll() {
-    return this.validateName() &&
-      this.validateEmail() &&
-      this.validatePassword() &&
+    return this.validatePassword() &&
       this.validatePasswordConfirmation()
   }
 
-  validateName() {
-    const { name } = this.refs
-
-    if (name.value.length > 1) {
-      this.setState({
-        nameError: null
-      })
-      return true
-    }
-
-    this.setState({
-      nameError: 'Please provide your name'
-    })
-    return false
-  }
-
-  validateEmail() {
-    const { email } = this.refs
-
-    if (email.value.match(/^[a-z0-9.\_-]+@[a-z0-9.\_-]+\.[a-z0-9.\_-]+$/)) {
-      this.setState({
-        emailError: null
-      })
-      return true
-    }
-
-    if (email.value === '') {
-      this.setState({
-        emailError: 'Please provide your email address'
-      })
-      return false
-    }
-
-    this.setState({
-      emailError: 'Please provide a valid email address'
-    })
-    return false
-  }
-
   validatePassword() {
-    debugger
     const { password, passwordConfirmation } = this.refs
 
     if (password.value.length < 6) {
       this.setState({
-        passwordError: 'Password is too short'
+        passwordError: 'Het wachtwoord is te kort, maak het wachtwoord langer.'
       })
       return false
     }
@@ -90,7 +46,7 @@ export class SetPassword extends PureComponent {
     }
 
     this.setState({
-      passwordError: 'Password should contain both letters and numbers'
+      passwordError: 'Het wachtwoord moet zowel letters als cijfers bevatten.'
     })
     return false
   }
@@ -106,62 +62,47 @@ export class SetPassword extends PureComponent {
     }
 
     this.setState({
-      passwordConfirmationError: 'Passwords do not match'
+      passwordConfirmationError: 'De wachtwoorden zijn niet hetzelfde'
     })
     return false
   }
 
+
   render() {
     return (
-      <div className="sign-up form">
-        <h1>Hoi Stefan</h1>
-
-        <form onSubmit={this.submitForm.bind(this)}>
-          <div className="input">
-            <input ref="name" type="text" disabled="disabled" placeholder="Your name"
-              onChange={this.validateName.bind(this)} />
-            { this.state.nameError ?
-              <p className="formError">{ this.state.nameError }</p> :
-              null
-            }
+      <div id="wrapper">
+        <section id="banner" className="major">
+          <div className="inner">
+            <header className="major">
+              <h1>Welkom bij Kollaart Opleidingen!</h1>
+              <h3>Om de leeromgeving te kunnen gebruiken, moet je een wachtwoord aanmaken.</h3>
+            </header>
+            <form onSubmit={this.submitForm.bind(this)}>
+              <div className="input">
+                <input ref="password" type="password" placeholder="Wachtwoord"
+                  onChange={this.validatePassword.bind(this)} />
+                { this.state.passwordError ?
+                  <p className="formError">{ this.state.passwordError }</p> :
+                  null
+                }
+              </div>
+              <div className="input">
+                <input ref="passwordConfirmation" type="password" placeholder="Herhaal wachtwoord"
+                  onKeyUp={this.validatePasswordConfirmation.bind(this)}
+                  onChange={this.validatePasswordConfirmation.bind(this)} />
+                { this.state.passwordConfirmationError ?
+                  <p className="formError">{ this.state.passwordConfirmationError }</p> :
+                  null
+                }
+              </div>
+              <input type="submit" value="Aanmelden" />
+            </form>
           </div>
-          <div className="input">
-            <input ref="email" disabled="disabled" type="email" placeholder="Email address"
-              onChange={this.validateEmail.bind(this)} />
-            { this.state.emailError ?
-              <p className="formError">{ this.state.emailError }</p> :
-              null
-            }
-          </div>
-          <div className="input">
-            <input ref="password" type="password" placeholder="Password"
-              onChange={this.validatePassword.bind(this)} />
-            { this.state.passwordError ?
-              <p className="formError">{ this.state.passwordError }</p> :
-              null
-            }
-          </div>
-          <div className="input">
-            <input ref="passwordConfirmation" type="password" placeholder="Repeat Password"
-              onKeyUp={this.validatePasswordConfirmation.bind(this)}
-              onChange={this.validatePasswordConfirmation.bind(this)} />
-            { this.state.passwordConfirmationError ?
-              <p className="formError">{ this.state.passwordConfirmationError }</p> :
-              null
-            }
-          </div>
-          <Link to="/sign-in">Sign in</Link>
-          <input type="submit" value="Sign up" />
-        </form>
+        </section>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ tokenUser }) => {
-  return {
-    ...tokenUser
-  }
-}
 
-export default connect(mapStateToProps, { fetchUser })(SetPassword)
+export default connect(null, { passwordUser })(SetPassword)
