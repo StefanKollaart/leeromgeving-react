@@ -18,7 +18,7 @@ class LessonsContainer extends PureComponent {
 
   render() {
     return(
-      <div className="lessons wrapper">
+      <div className="inner">
         <header>
           <h1>Lessen</h1>
         </header>

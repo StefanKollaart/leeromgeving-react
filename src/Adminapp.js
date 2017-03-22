@@ -18,8 +18,10 @@ class Adminapp extends React.Component {
           <header id="header" className="alt">
             <Navigation />
           </header>
-          {this.props.children}
-        </div>
+          <div id="main">
+            {this.props.children}
+          </div>
+          </div>
       )
     } else {
       return (

@@ -105,30 +105,25 @@ export class EditLesson extends Component {
         {this.loadEditLesson()}
       }
         return (
-        <div>
-          <h1>{this.state.title}</h1>
-          <form onSubmit={this.handleSubmit}>
-            <ul className="form-style-1">
-              <div className="lessonGeneral">
-                <li>
+						<div className="inner">
+              <form onSubmit={this.handleSubmit}>
+                <section>
+                  <h1>{this.state.title}</h1>
                   <label>Lesnummer <span className="required">*</span></label>
                   <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
-                </li>
-                <li>
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
-                </li>
-              </div>
-              <div className="lessonDetails">
+            </section>
+              <section>
+                <hr/>
                 <h2>Content</h2>
-                <h3><a onClick={this.addTekstField}>Voeg tekst toe</a></h3>
-                <h3><a onClick={this.addVideoField}>Voeg video toe</a></h3>
                 {this.state.content.map(this.renderContent)}
-              </div>
-              <input type="submit" value="Opslaan" />
-            </ul>
+                <span><button onClick={this.addTekstField}>Voeg tekst toe</button></span>
+                <span><button onClick={this.addVideoField}>Voeg video toe</button></span>
+                <input type="submit" value="Opslaan" />
+            </section>
           </form>
-        </div>
+          </div>
       )
     } else {
       return <div></div>

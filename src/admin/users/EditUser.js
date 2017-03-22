@@ -85,11 +85,9 @@ export class EditUser extends Component {
     if(this.props.email != undefined) {
       {this.loadEditUser()}
       return (
-        <section id="banner" className="major">
           <div className="inner">
-            <header className="major">
+            <section>
               <h1>{this.state.first_name} {this.state.last_name}</h1>
-            </header>
 
               <form onSubmit={this.submitForm.bind(this)}>
                       <label>Voornaam <span className="required">*</span></label>
@@ -101,9 +99,9 @@ export class EditUser extends Component {
                       <h2>Groepen</h2>
                       {this.props.allGroups.map(this.renderCheckboxes)}
                   <input type="submit" value="Aanmaken" />
-            </form>
+              </form>
+            </section>
           </div>
-        </section>
       )
     } else {
       return(

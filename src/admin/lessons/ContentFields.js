@@ -37,16 +37,17 @@ class ContentFields extends Component {
     const { editorContents } = this.state;
     if (this.props.type == 1) {
       return(
-        <li>
+        <span>
           <label>Video ({this.props.order}) - <span className="removeItem" onClick={() => {this.props.removeItem(this.props.id)}}>Verwijder</span></label>
           {this.props.content ? <iframe className="vimeo" src={"https://player.vimeo.com/video/" + this.props.content} width="640" height="360" allowFullScreen>
           </iframe>  : null }
           <input type="text" placeholder="Vimeo ID" value={this.props.content} onChange={this.props.handleVideo.bind(this, this.props.id)} className="field-long"/>
-        </li>
+          <hr/>
+        </span>
       )
     } else if (this.props.type == 2) {
       return(
-        <li>
+        <span>
         <label>Tekst ({this.props.order}) - <span className="removeItem" onClick={() => {this.props.removeItem(this.props.id)}}>Verwijder</span></label>
           <Editor
             hashtag={{}}
@@ -56,7 +57,9 @@ class ContentFields extends Component {
             editorClassName="demo-editor"
             onEditorStateChange={this.onEditorStateChange.bind(this, 0)}
           />
-        </li>
+          <hr/>
+        </span>
+
       )
     } else {
       return(

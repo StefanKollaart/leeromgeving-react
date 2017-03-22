@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 class AdminUsers extends PureComponent {
   render() {
     return(
-      <div>
+      <div className="inner">
         <h1>Gebruikers</h1>
         <ul>
           <li><Link to="/admin/sign-up">Nieuwe gebruiker</Link></li>

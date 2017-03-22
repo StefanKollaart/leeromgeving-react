@@ -17,6 +17,9 @@ export default (state = initialState, { type, payload }) => {
       localStorage.removeItem(CURRENT_USER_KEY)
       return null
 
+    case UPDATED_CURRENT_USER :
+        return Object.assign({}, payload)
+
     default :
       return state
   }

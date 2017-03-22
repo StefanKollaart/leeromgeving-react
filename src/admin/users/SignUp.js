@@ -20,29 +20,23 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <div className="sign-up form">
-        <h1>Nieuwe gebruiker</h1>
+        <div className="inner">
+          <section>
+            <h1>Nieuwe gebruiker</h1>
 
-        <form onSubmit={this.submitForm.bind(this)}>
-          <ul className="form-style-1">
-            <div className="form-fields">
-              <li>
-                <label>Voornaam <span className="required">*</span></label>
-                <input ref="firstname" type="text" placeholder="Voornaam" className="field-long" />
-              </li>
-              <li>
-                <label>Achternaam <span className="required">*</span></label>
-                <input ref="lastname" type="text" placeholder="Achternaam" className="field-long" />
-              </li>
-              <li>
-                <label>E-mail <span className="required">*</span></label>
-                <input ref="email" type="text" placeholder="E-mail" className="field-long"/>
-              </li>
-            </div>
-            <input type="submit" value="Aanmaken" />
-          </ul>
-        </form>
-      </div>
+            <form onSubmit={this.submitForm.bind(this)}>
+                <div className="form-fields">
+                    <label>Voornaam <span className="required">*</span></label>
+                    <input ref="firstname" type="text" placeholder="Voornaam" className="field-long" />
+                    <label>Achternaam <span className="required">*</span></label>
+                    <input ref="lastname" type="text" placeholder="Achternaam" className="field-long" />
+                    <label>E-mail <span className="required">*</span></label>
+                    <input ref="email" type="text" placeholder="E-mail" className="field-long"/>
+                </div>
+                <input type="submit" value="Aanmaken" />
+            </form>
+          </section>
+        </div>
     )
   }
 }

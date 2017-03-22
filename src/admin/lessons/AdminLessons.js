@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 class AdminLessons extends PureComponent {
   render() {
     return(
-      <div>
+      <div className="inner">
         <h1>Lessen</h1>
         <ul>
           <li><Link to="/admin/create-lesson">Nieuwe les</Link></li>

@@ -39,24 +39,22 @@ export class CreateLesson extends Component {
 
   render() {
         return (
-        <div>
-          <h1>{this.state.title ? this.state.title : "Nieuwe les"}</h1>
+            <div className="inner">
+              <section>
+                <h1>{this.state.title ? this.state.title : "Nieuwe les"}</h1>
+
+
           <form onSubmit={this.handleSubmit}>
-            <ul className="form-style-1">
-              <div className="form-fields">
-                <li>
+            <div className="form-fields">
                   <label>Lesnummer <span className="required">*</span></label>
                   <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" className="field-long" />
-                </li>
-                <li>
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" className="field-long"/>
-                </li>
               </div>
             <input type="submit" value="Opslaan" />
-            </ul>
-          </form>
-        </div>
+            </form>
+          </section>
+          </div>
       )
   }
 }

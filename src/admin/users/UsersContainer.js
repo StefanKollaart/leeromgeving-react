@@ -18,7 +18,7 @@ class UsersContainer extends PureComponent {
 
   render() {
     return(
-      <div className="users wrapper">
+      <div className="inner">
         <header>
           <h1>Gebruikers</h1>
         </header>
