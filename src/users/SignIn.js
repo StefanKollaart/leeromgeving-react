@@ -29,13 +29,9 @@ export class SignIn extends PureComponent {
           </header>
 
           <form onSubmit={this.submitForm.bind(this)}>
-            <div class="row uniform">
-              <div class="6u 12u$(xsmall)">
-                <input ref="email" type="email" placeholder="E-mail"/>
-              </div>
-              <div class="6u$ 12u$(xsmall)">
-                <input ref="password" type="password" placeholder="Wachtwoord" />
-              </div>
+            <div>
+              <input ref="email" type="email" placeholder="E-mail"/>
+              <input ref="password" type="password" placeholder="Wachtwoord" />
             <input type="submit" value="Inloggen" />
           </div>
         </form>

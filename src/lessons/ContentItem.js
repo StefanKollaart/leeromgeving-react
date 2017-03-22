@@ -20,10 +20,9 @@ class ContentItem extends PureComponent {
     const { content } = this.props
     if (content.type == 1) {
       return (
-        <iframe src={"https://player.vimeo.com/video/" + content.content} width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe src={"https://player.vimeo.com/video/" + content.content} width="640" height="360" frameBorder="0"  allowFullScreen></iframe>
       )
     } else if(content.type == 2) {
-      debugger
       return (
         <div dangerouslySetInnerHTML={{ __html: content.content }} />
       )

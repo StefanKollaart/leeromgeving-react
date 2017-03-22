@@ -2,36 +2,74 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetchLessons from '../actions/lessons/fetch'
 import ContentItem from './ContentItem'
+import PageIndicators from './PageIndicators'
+import lessonWorking from '../actions/user/lesson-working'
 
 export class LessonPage extends PureComponent {
   static propTypes = {}
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      contentId: 0
+    }
+
+    this.increaseContent = this.increaseContent.bind(this)
+    this.decreaseContent = this.decreaseContent.bind(this)
+  }
 
   renderItem(content, index) {
     return <ContentItem content = {content} key={index} />
   }
 
   componentDidMount() {
+    let user = this.props.currentUser
+    user.lesson_working = this.props.params.lessonId
+    this.props.lessonWorking(user)
     this.props.fetchLessons()
   }
+
+  increaseContent() {
+    if (this.state.contentId + 1 < this.props.content.length) {
+      let contentId = this.state.contentId + 1
+      this.setState({
+        contentId: contentId
+      })
+    }
+  }
+
+  decreaseContent() {
+    if (this.state.contentId >= 0) {
+      let contentId = this.state.contentId - 1
+      this.setState({
+        contentId: contentId
+      })
+    }
+  }
+
 
   render() {
     const { title, content } = this.props
 
     return(
-      <section className="panel banner right">
-        <div className="content color0 span-8">
-        <h1>{ title }</h1>
-
-        <main>
-          {(content != undefined && content.map(this.renderItem))}
-        </main>
-        </div>
-      </section>
+      <div id="main">
+        <section id="one">
+          <div className="inner">
+            <header className="major">
+              <h1>{ title }</h1>
+            </header>
+            {((content != undefined && content.length > 0) && this.renderItem(content[this.state.contentId], this.state.contentId))}
+            <div className="arrows">
+              {(content != undefined && <PageIndicators content={content} contentId={this.state.contentId} increaseContent={this.increaseContent} decreaseContent={this.decreaseContent}/>)}
+            </div>
+          </div>
+        </section>
+      </div>
     )
   }
 }
 
-const mapStateToProps = ({ lessons }, { params }) => {
+const mapStateToProps = ({ lessons, currentUser }, { params }) => {
   const lesson = lessons.reduce((prev, next) => {
     if (next._id === params.lessonId) {
       return next
@@ -40,8 +78,10 @@ const mapStateToProps = ({ lessons }, { params }) => {
   }, {})
 
   return {
-    ...lesson
+    ...lesson, currentUser
   }
 }
 
-export default connect(mapStateToProps, { fetchLessons })(LessonPage)
+
+
+export default connect(mapStateToProps, { lessonWorking, fetchLessons })(LessonPage)

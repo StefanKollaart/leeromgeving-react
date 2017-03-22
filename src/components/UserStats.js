@@ -42,7 +42,7 @@ export class UserStats extends PureComponent {
 
 
   render() {
-    const { signedIn, userName } = this.props
+    const { signedIn, userName, lessonWorking } = this.props
     return(
       <section id="banner" className="major">
         <div className="inner">
@@ -51,7 +51,8 @@ export class UserStats extends PureComponent {
             <h2>{this.getMessage()}</h2>
           </header>
           <div className="content">
-            <p>Je was hiermee bezig [LES PLACEHOLDER]. <br/><br/><button>Verder gaan</button></p>
+            <p>Les waar je mee bezig bent: "{lessonWorking.title}".
+            <Link className="leren" to={`/lessons/${lessonWorking._id}`}><br/><button className="lerenButton">Ga verder met {lessonWorking.title}</button></Link></p>
           </div>
         </div>
       </section>
@@ -61,7 +62,8 @@ export class UserStats extends PureComponent {
 
 const mapStateToProps = ({ currentUser }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
-  userName: (currentUser.first_name)
+  userName: (currentUser.first_name),
+  lessonWorking: (currentUser.lesson_working)
 })
 
 export default connect(mapStateToProps)(UserStats)
