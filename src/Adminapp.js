@@ -3,7 +3,6 @@ import LessonsContainer from './lessons/LessonsContainer'
 import { connect } from 'react-redux'
 import SignIn from './users/SignIn'
 import Navigation from './admin/components/Navigation'
-import './Adminapp.scss'
 
 class Adminapp extends React.Component {
   static propTypes = {
@@ -19,9 +18,7 @@ class Adminapp extends React.Component {
           <header id="header" className="alt">
             <Navigation />
           </header>
-          <div className="content">
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
       )
     } else {

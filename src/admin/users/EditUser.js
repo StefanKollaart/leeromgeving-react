@@ -85,31 +85,25 @@ export class EditUser extends Component {
     if(this.props.email != undefined) {
       {this.loadEditUser()}
       return (
-        <div className="sign-up form">
-          <h1>{this.state.first_name} {this.state.last_name}</h1>
+        <section id="banner" className="major">
+          <div className="inner">
+            <header className="major">
+              <h1>{this.state.first_name} {this.state.last_name}</h1>
+            </header>
 
-          <form onSubmit={this.submitForm.bind(this)}>
-            <ul className="form-style-1">
-              <div className="form-fields">
-                <li>
-                  <label>Voornaam <span className="required">*</span></label>
-                  <input type="text" placeholder="Voornaam" value={this.state.first_name} onChange={this.handleFirstName} className="field-long"/>
-                </li>
-                <li>
-                  <label>Achternaam <span className="required">*</span></label>
-                  <input type="text" placeholder="Achternaam" value={this.state.last_name} onChange={this.handleLastName} className="field-long"/>
-                </li>
-                <li>
-                  <label>E-mail <span className="required">*</span></label>
-                  <input type="text" placeholder="E-mail" value={this.state.email} onChange={this.handleEmail} className="field-long"/>
-                </li>
-                  <h2>Groepen</h2>
-                  {this.props.allGroups.map(this.renderCheckboxes)}
-              </div>
-              <input type="submit" value="Aanmaken" />
-            </ul>
-          </form>
-        </div>
+              <form onSubmit={this.submitForm.bind(this)}>
+                      <label>Voornaam <span className="required">*</span></label>
+                      <input type="text" placeholder="Voornaam" value={this.state.first_name} onChange={this.handleFirstName} className="field-long"/>
+                      <label>Achternaam <span className="required">*</span></label>
+                      <input type="text" placeholder="Achternaam" value={this.state.last_name} onChange={this.handleLastName} className="field-long"/>
+                      <label>E-mail <span className="required">*</span></label>
+                      <input type="text" placeholder="E-mail" value={this.state.email} onChange={this.handleEmail} className="field-long"/>
+                      <h2>Groepen</h2>
+                      {this.props.allGroups.map(this.renderCheckboxes)}
+                  <input type="submit" value="Aanmaken" />
+            </form>
+          </div>
+        </section>
       )
     } else {
       return(

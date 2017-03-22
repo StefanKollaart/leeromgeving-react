@@ -1,6 +1,6 @@
 import { USER_SIGNED_IN } from '../actions/user/sign-in'
 import { USER_SIGNED_OUT } from '../actions/user/sign-out'
-import { UPDATED_CURRENT_USER } from '../actions/user/lesson-working' 
+import { UPDATED_CURRENT_USER } from '../actions/user/lesson-working'
 
 const CURRENT_USER_KEY = 'kollaart.currentUser'
 
@@ -16,9 +16,6 @@ export default (state = initialState, { type, payload }) => {
     case USER_SIGNED_OUT :
       localStorage.removeItem(CURRENT_USER_KEY)
       return null
-
-    case UPDATED_CURRENT_USER :
-      return Object.assign({}, payload)
 
     default :
       return state
