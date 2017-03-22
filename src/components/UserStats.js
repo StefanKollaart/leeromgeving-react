@@ -1,8 +1,10 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-export class UserStats extends PureComponent {
+export class UserStats extends Component {
+
+
 
   getGreeting() {
   var d = new Date();
@@ -61,6 +63,7 @@ export class UserStats extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser }) => ({
+  currentUser: currentUser,
   signedIn: (!!currentUser && !!currentUser._id),
   userName: (currentUser.first_name),
   lessonWorking: (currentUser.lesson_working)

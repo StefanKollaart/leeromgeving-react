@@ -29,8 +29,8 @@ class LessonsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ lessons }) => ({
-  lessons
+const mapStateToProps = ({ lessons, currentUser }) => ({
+  lessons, currentUser
 })
 
 export default connect(mapStateToProps, { fetchLessons })(LessonsContainer)
