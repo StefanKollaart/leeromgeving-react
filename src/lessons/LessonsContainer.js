@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react'
 import LessonItem from './LessonItem'
 import { connect } from 'react-redux'
 import fetchLessons from '../actions/lessons/fetch'
+import UserStats from '../components/UserStats'
 
 class LessonsContainer extends PureComponent {
   static propTypes = {
@@ -18,11 +19,12 @@ class LessonsContainer extends PureComponent {
 
   render() {
     return(
-      <section id="one" class="tiles">
-        <main>
-          {this.props.lessons.map(this.renderLessons)}
-        </main>
-      </section>
+        <div id="main">
+          <UserStats/>
+          <section id="one" className="tiles">
+            {this.props.lessons.map(this.renderLessons)}
+          </section>
+        </div>
     )
   }
 }

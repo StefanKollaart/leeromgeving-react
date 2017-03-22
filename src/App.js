@@ -3,7 +3,6 @@ import LessonsContainer from './lessons/LessonsContainer'
 import Navigation from './components/Navigation'
 import { connect } from 'react-redux'
 import SignIn from './users/SignIn'
-import UserStats from './components/UserStats'
 import './App.scss'
 
 class App extends React.Component {
@@ -17,11 +16,8 @@ class App extends React.Component {
     if(signedIn) {
       return (
         <div id="wrapper">
-            <Navigation />
-          <UserStats/>
-          <div id="main">
-            {this.props.children}
-          </div>
+          <Navigation />
+          {this.props.children}
           <footer id="footer">
             <div className="inner">
               <ul className="icons">
