@@ -2,18 +2,18 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import editUser from '../../actions/user/update'
 import fetchUsers from '../../actions/user/fetch'
-import fetchGroups from '../../actions/groups/fetch'
+import fetchCourses from '../../actions/courses/fetch'
 import RenderCheckboxes from './RenderCheckboxes'
 
 export class EditUser extends Component {
   componentWillMount() {
     this.props.fetchUsers()
-    this.props.fetchGroups()
+    this.props.fetchCourses()
     this.handleFirstName = this.handleFirstName.bind(this)
     this.handleLastName = this.handleLastName.bind(this)
     this.handleEmail = this.handleEmail.bind(this)
     this.renderCheckboxes = this.renderCheckboxes.bind(this)
-    this.handleGroups = this.handleGroups.bind(this)
+    this.handleCourses = this.handleCourses.bind(this)
   }
 
   loadEditUser() {
@@ -22,12 +22,12 @@ export class EditUser extends Component {
         first_name: this.props.first_name,
         last_name: this.props.last_name,
         email: this.props.email,
-        groups: this.props.groups,
+        courses: this.props.courses,
       }
   }
 
   renderCheckboxes(checkbox, index) {
-    return <RenderCheckboxes key={index} checkBoxId={index} userGroups={this.props.groups} {...checkbox} handleGroups={this.handleGroups} />
+    return <RenderCheckboxes key={index} checkBoxId={index} userCourses={this.props.courses} {...checkbox} handleCourses={this.handleCourses} />
   }
 
   handleFirstName(event) {
@@ -48,16 +48,16 @@ export class EditUser extends Component {
     });
   }
 
-  handleGroups(changedGroup, isChecked) {
-    var newGroups = this.state.groups
-    var fullGroup = this.props.allGroups.find(function(group) {
-      return group.courseId == changedGroup.courseId && group.day == changedGroup.day && group.year == changedGroup.year
+  handleCourses(changedCourse, isChecked) {
+    var newCourses = this.state.courses
+    var fullCourse = this.props.allCourses.find(function(course) {
+      return course.courseType == changedCourse.courseType
     })
     if(isChecked) {
-      newGroups.push(fullGroup)
+      newCourses.push(fullCourse)
     } else {
-      newGroups = this.state.groups.filter(function(group) {
-        if (group.day != fullGroup.day || group.year != fullGroup.year || group.courseId != fullGroup.courseId) {
+      newCourses = this.state.courses.filter(function(course) {
+        if (course.courseType != fullCourse.courseType) {
           return true
         } else {
           return false
@@ -65,7 +65,8 @@ export class EditUser extends Component {
       })
     }
     this.setState({
-      groups: newGroups
+      courses: newCourses
+    }, function() {
     })
   }
 
@@ -76,7 +77,7 @@ export class EditUser extends Component {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
-        groups: this.state.groups,
+        courses: this.state.courses,
       }
       this.props.editUser(user)
   }
@@ -96,8 +97,8 @@ export class EditUser extends Component {
                       <input type="text" placeholder="Achternaam" value={this.state.last_name} onChange={this.handleLastName} className="field-long"/>
                       <label>E-mail <span className="required">*</span></label>
                       <input type="text" placeholder="E-mail" value={this.state.email} onChange={this.handleEmail} className="field-long"/>
-                      <h2>Groepen</h2>
-                      {this.props.allGroups.map(this.renderCheckboxes)}
+                      <h2>Opleidingen</h2>
+                      {this.props.allCourses.map(this.renderCheckboxes)}
                   <input type="submit" value="Aanmaken" />
               </form>
             </section>
@@ -111,7 +112,7 @@ export class EditUser extends Component {
   }
 }
 
-const mapStateToProps = ({ users, groups }, { params }) => {
+const mapStateToProps = ({ users, courses }, { params }) => {
   const user = users.reduce((prev, next) => {
     if (next._id === params.userId) {
       return next
@@ -120,8 +121,8 @@ const mapStateToProps = ({ users, groups }, { params }) => {
   }, {})
 
   return {
-    ...user, allGroups: groups
+    ...user, allCourses: courses
   }
 }
 
-export default connect(mapStateToProps, { editUser, fetchUsers, fetchGroups })(EditUser)
+export default connect(mapStateToProps, { editUser, fetchUsers, fetchCourses })(EditUser)

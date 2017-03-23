@@ -53,8 +53,8 @@ export class UserStats extends Component {
             <h2>{this.getMessage()}</h2>
           </header>
           <div className="content">
-            <p>Les waar je mee bezig bent: "{lessonWorking.title}".
-            <Link className="leren" to={`/lessons/${lessonWorking._id}`}><br/><button className="lerenButton">Ga verder met {lessonWorking.title}</button></Link></p>
+            <p>{lessonWorking ? "Je bent nu bezig met: " : ""}{lessonWorking ? lessonWorking.title : ""}
+            {lessonWorking ? <Link className="leren" to={`/lessons/${lessonWorking._id}`}><br/><button className="lerenButton">Ga verder met {lessonWorking.title}</button></Link> : ""}</p>
           </div>
         </div>
       </section>
@@ -69,4 +69,5 @@ const mapStateToProps = ({ currentUser }) => ({
   lessonWorking: (currentUser.lesson_working)
 })
 
-export default connect(mapStateToProps)(UserStats)
+export default connect(mapStateToProps
+)(UserStats)

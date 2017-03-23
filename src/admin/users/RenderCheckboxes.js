@@ -6,13 +6,13 @@ class RenderCheckboxes extends Component {
   constructor(props) {
     super(props)
     if (this.state == null) {
-      if(this.props.userGroups.length == 0) {
+      if(this.props.userCourses.length == 0) {
         this.state = {
           isChecked: false,
         }
       } else {
-        for (var i = 0; i < this.props.userGroups.length; i++) {
-          if(this.props.userGroups[i].courseId == this.props.courseId && this.props.userGroups[i].year == this.props.year && this.props.userGroups[i].day == this.props.day) {
+        for (var i = 0; i < this.props.userCourses.length; i++) {
+          if(this.props.userCourses[i].courseType == this.props.courseType && this.props.userCourses[i].year == this.props.year && this.props.userCourses[i].day == this.props.day) {
             this.state = {
               isChecked: true
             }
@@ -35,46 +35,15 @@ class RenderCheckboxes extends Component {
     this.setState({
       isChecked: !this.state.isChecked
     }, function() {
-      let changedGroup = {
-        year: this.props.year,
-        day: this.props.day,
-        courseId: this.props.courseId
+      let changedCourse = {
+        courseType: this.props.courseType
       }
-      this.props.handleGroups(changedGroup, this.state.isChecked)
+      this.props.handleCourses(changedCourse, this.state.isChecked)
     })
   }
 
-  renderDay(day) {
-    switch (day) {
-      case 0:
-        return "Zondag"
-        break;
-      case 1:
-        return "Maandag"
-        break;
-      case 2:
-        return "Dinsdag"
-        break;
-      case 3:
-        return "Woensdag"
-        break;
-      case 4:
-        return "Donderdag"
-        break;
-      case 5:
-        return "Vrijdag"
-        break;
-      case 6:
-        return "Zaterdag"
-        break;
-
-      default:
-      return "Dag niet gevonden"
-    }
-  }
-
-  renderCourse(courseId) {
-    switch (courseId) {
+  renderCourse(courseType) {
+    switch (courseType) {
       case 1:
         return "Pedicure"
         break;
@@ -87,16 +56,14 @@ class RenderCheckboxes extends Component {
   }
 
   static propTypes = {
-    courseId: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired,
-    userGroups: PropTypes.array,
+    courseType: PropTypes.number.isRequired,
+    userCourses: PropTypes.array,
   }
 
   render() {
-    const { courseId, year, day, checkBoxId } = this.props
+    const { courseType } = this.props
 
-    return(<div><input type="checkbox" checked={this.state.isChecked} onChange={this.handleClick} />{this.renderCourse(courseId)} - {year} - {this.renderDay(day)}</div>)
+    return(<div><input type="checkbox" checked={this.state.isChecked} onChange={this.handleClick} />{this.renderCourse(courseType)}</div>)
   }
 }
 

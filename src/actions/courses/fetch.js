@@ -1,25 +1,25 @@
 import API from '../../middleware/api'
 
-export const FETCHED_GROUPS = 'FETCHED_GROUPS'
+export const FETCHED_COURSES = 'FETCHED_GROUPS'
 
 const api = new API()
-const groups = api.service('groups')
+const courses = api.service('courses')
 
 export default() => {
   return(dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      groups.find()
+      courses.find()
         .then((result) => {
-          dispatch(fetchedGroups(result))
+          dispatch(fetchedCourses(result))
         })
     })
   }
 }
 
-const fetchedGroups = (result) => {
+const fetchedCourses = (result) => {
   return {
-    type: FETCHED_GROUPS,
+    type: FETCHED_COURSES,
     payload: [].concat(result.data)
   }
 }

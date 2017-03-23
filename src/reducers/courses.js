@@ -1,8 +1,8 @@
-import { FETCHED_GROUPS } from '../actions/groups/fetch'
+import { FETCHED_COURSES } from '../actions/courses/fetch'
 
 export default (state = [], { type, payload } = {}) => {
   switch(type) {
-    case FETCHED_GROUPS:
+    case FETCHED_COURSES:
       return [].concat(payload)
 
     default :

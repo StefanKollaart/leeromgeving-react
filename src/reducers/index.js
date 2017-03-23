@@ -1,11 +1,11 @@
 import lessons from './lessons'
 import currentUser from './current-user'
 import users from './users'
-import groups from './groups'
+import courses from './courses'
 
 module.exports = {
   lessons,
-  groups,
+  courses,
   currentUser,
   users,
 }

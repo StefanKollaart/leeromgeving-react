@@ -10,7 +10,7 @@ export class LessonPage extends PureComponent {
 
   constructor(props) {
     super(props)
-    if(this.props.currentUser.lesson_working._id == this.props.params.lessonId) {
+    if(this.props.currentUser.lesson_working && this.props.currentUser.lesson_working._id == this.props.params.lessonId) {
       this.state = {
         contentId: this.props.currentUser.content_working
       }
