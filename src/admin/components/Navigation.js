@@ -19,6 +19,7 @@ export class Adminnavigation extends PureComponent {
     return (
       <nav className="menubar">
           <li><Link to="/admin/users">Gebruikers</Link></li>
+          <li><Link to="/admin/tracks">Tracks</Link></li>
           <li><Link to="/admin/lessons">Lessen</Link></li>
           <li><Link to="/">Leeromgeving</Link></li>
           <li><a href="#" onClick={this.signOut.bind(this)}>Log uit</a></li>

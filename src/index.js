@@ -24,8 +24,8 @@ import SignUp from './admin/users/SignUp'
 import EditUser from './admin/users/EditUser'
 import UsersContainer from './admin/users/UsersContainer'
 
-import AdminGroups from './admin/groups/AdminGroups'
-import CreateGroup from './admin/groups/CreateGroup'
+import AdminTracks from './admin/tracks/AdminTracks'
+import CreateTrack from './admin/tracks/CreateTrack'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -46,8 +46,8 @@ ReactDOM.render(
         <Route path="/admin/lessons/all" component={AdminLessonsContainer} />
         <Route path="/admin/lessons/:lessonId" component={EditLesson} />
         <Route path="/admin/create-lesson" component={CreateLesson} />
-        <Route path="/admin/groups" component={AdminGroups} />
-        <Route path="/admin/create-group" component={CreateGroup} />
+        <Route path="/admin/tracks" component={AdminTracks} />
+        <Route path="/admin/create-track" component={CreateTrack} />
       </Route>
     </Router>
   </Provider>,

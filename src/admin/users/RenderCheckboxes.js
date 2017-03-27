@@ -6,7 +6,7 @@ class RenderCheckboxes extends Component {
   constructor(props) {
     super(props)
     if (this.state == null) {
-      if(this.props.userCourses.length == 0) {
+      if(!this.props.userCourses || this.props.userCourses.length == 0) {
         this.state = {
           isChecked: false,
         }

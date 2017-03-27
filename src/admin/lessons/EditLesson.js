@@ -5,11 +5,15 @@ import fetchLessons from '../../actions/lessons/fetch'
 import ContentFields from './ContentFields'
 import TekstFields from './TekstFields'
 import update from '../../actions/lessons/update'
+import RenderCheckboxes from '../users/RenderCheckboxes'
+import fetchCourses from '../../actions/courses/fetch'
+
 
 export class EditLesson extends Component {
 
   componentWillMount() {
     this.props.fetchLessons()
+    this.props.fetchCourses()
     this.loadEditLesson = this.loadEditLesson.bind(this)
     this.handleNumber = this.handleNumber.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
@@ -20,16 +24,51 @@ export class EditLesson extends Component {
     this.renderContent = this.renderContent.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
+    this.handleCourses = this.handleCourses.bind(this)
+    this.renderCheckboxes = this.renderCheckboxes.bind(this)
   }
 
   loadEditLesson() {
     if (this.state == null) {
+      let userCourses
+      if (this.props.courses) {
+        userCourses = this.props.courses
+      } else {
+        userCourses = []
+      }
       this.state = {
         lessonNumber: this.props.lessonNumber,
         title: this.props.title,
         content: this.props.content,
+        courses: userCourses,
       }
     }
+  }
+
+  renderCheckboxes(checkbox, index) {
+    return <RenderCheckboxes key={index} checkBoxId={index} userCourses={this.props.courses} {...checkbox} handleCourses={this.handleCourses} />
+  }
+
+  handleCourses(changedCourse, isChecked) {
+    var newCourses = this.state.courses
+    var fullCourse = this.props.allCourses.find(function(course) {
+      return course.courseType == changedCourse.courseType
+    })
+    if(isChecked) {
+      newCourses.push(fullCourse)
+    } else {
+      newCourses = this.state.courses.filter(function(course) {
+        if (course.courseType != fullCourse.courseType) {
+          return true
+        } else {
+          return false
+        }
+      })
+    }
+    this.setState({
+      courses: newCourses
+    }, function() {
+    })
   }
 
   handleNumber(event) {
@@ -94,7 +133,8 @@ export class EditLesson extends Component {
       _id: this.props._id,
       lessonNumber: this.state.lessonNumber,
       title: this.state.title,
-      content: this.state.content
+      content: this.state.content,
+      courses: this.state.courses,
     }
     this.props.update(lesson)
   }
@@ -113,7 +153,9 @@ export class EditLesson extends Component {
                   <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
-            </section>
+                  <label>Opleidingen <span className="required"></span></label>
+                  {this.props.allCourses.map(this.renderCheckboxes)}
+                </section>
               <section>
                 <hr/>
                 <h2>Content</h2>
@@ -131,7 +173,7 @@ export class EditLesson extends Component {
   }
 }
 
-const mapStateToProps = ({ lessons }, { params }) => {
+const mapStateToProps = ({ lessons, courses }, { params }) => {
   const lesson = lessons.reduce((prev, next) => {
     if (next._id === params.lessonId) {
       return next
@@ -140,8 +182,8 @@ const mapStateToProps = ({ lessons }, { params }) => {
   }, {})
 
   return {
-    ...lesson
+    ...lesson, allCourses: courses
   }
 }
 
-export default connect(mapStateToProps, { fetchLessons, update })(EditLesson)
+export default connect(mapStateToProps, { fetchLessons, update, fetchCourses})(EditLesson)
