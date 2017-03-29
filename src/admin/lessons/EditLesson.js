@@ -7,6 +7,7 @@ import TekstFields from './TekstFields'
 import update from '../../actions/lessons/update'
 import TrackSelect from './TrackSelect'
 import fetchTracks from '../../actions/tracks/fetch'
+import Question from './Question'
 
 
 export class EditLesson extends Component {
@@ -16,12 +17,19 @@ export class EditLesson extends Component {
     this.props.fetchTracks()
     this.loadEditLesson = this.loadEditLesson.bind(this)
     this.handleNumber = this.handleNumber.bind(this)
+    this.handleAnswer = this.handleAnswer.bind(this)
+    this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
+    this.handleQuestion = this.handleQuestion.bind(this)
+    this.addQuestion = this.addQuestion.bind(this)
+    this.addAnswer = this.addAnswer.bind(this)
     this.addVideoField = this.addVideoField.bind(this)
     this.addTekstField = this.addTekstField.bind(this)
     this.removeItem = this.removeItem.bind(this)
+    this.removeQuestion = this.removeQuestion.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderContent = this.renderContent.bind(this)
+    this.renderQuiz = this.renderQuiz.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
     this.handleTrack = this.handleTrack.bind(this)
@@ -41,6 +49,7 @@ export class EditLesson extends Component {
         title: this.props.title,
         content: this.props.content,
         track: userTrack,
+        questions: this.props.questions,
       }
     }
   }
@@ -69,6 +78,43 @@ export class EditLesson extends Component {
     })
   }
 
+  handleQuestion(index, event) {
+    var newQuestion = this.state.questions
+    newQuestion[index].question = event.target.value
+    this.setState({
+      question: newQuestion
+    })
+  }
+
+  handleAnswer(questionIndex, index, event) {
+    var newQuestion = this.state.questions
+    newQuestion[questionIndex].answers[index].answer = event.target.value
+    this.setState({
+      questions: newQuestion
+    })
+  }
+
+  handleCorrectAnswer(questionIndex, event) {
+    var newQuestion = this.state.questions
+    newQuestion[questionIndex].correctAnswer = Number(event.target.value)
+    debugger
+    this.setState({
+      questions: newQuestion
+    })
+  }
+
+  addAnswer(index, event) {
+    event.preventDefault()
+    var newQuestion = this.state.questions
+    newQuestion[index].answers.push({
+      order: newQuestion[index].answers.length + 1, answer: ""
+    })
+    this.setState({
+      question: newQuestion
+    })
+  }
+
+
   handleTekst(index, value) {
     var newContent = this.state.content
     newContent[index].content = value
@@ -85,11 +131,24 @@ export class EditLesson extends Component {
     })
   }
 
+  removeQuestion(index) {
+    var newQuestions = this.state.questions
+    newQuestions.splice(index, 1)
+    this.setState({
+      questions: newQuestions
+    })
+  }
+
   renderContent(content, index) {
     return <ContentFields key={index} {...content} id={index} handleVideo={this.handleVideo} removeItem={this.removeItem} handleTekst={this.handleTekst} />
   }
 
-  addVideoField() {
+  renderQuiz(question, index) {
+    return <Question key={index} {...question} id={index} removeQuestion={this.removeQuestion} handleQuestion={this.handleQuestion} addAnswer={this.addAnswer} handleAnswer={this.handleAnswer} handleCorrectAnswer={this.handleCorrectAnswer}/>
+  }
+
+  addVideoField(event) {
+    event.preventDefault()
     var newContent = this.state.content
     newContent.push({type: 1, order: this.state.content.length + 1, content: ""})
     this.setState({
@@ -97,13 +156,27 @@ export class EditLesson extends Component {
     })
   }
 
-  addTekstField() {
+  addTekstField(event) {
+    event.preventDefault()
     var newContent = this.state.content
     newContent.push({type: 2, order: this.state.content.length + 1, content: ""})
     this.setState({
       content: newContent
     })
   }
+
+  addQuestion(event) {
+    event.preventDefault()
+    var newQuestions = this.state.questions
+    newQuestions.push({order: this.state.questions.length + 1, question: "", correctAnswer: 1, answers: [{
+      order: 1, answer: ""
+    }]})
+    this.setState({
+      questions: newQuestions
+    })
+  }
+
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -121,6 +194,7 @@ export class EditLesson extends Component {
       title: this.state.title,
       content: this.state.content,
       track: newTrack,
+      questions: this.state.questions,
     }
     this.props.update(lesson)
   }
@@ -163,6 +237,11 @@ export class EditLesson extends Component {
                 {this.state.content.map(this.renderContent)}
                 <span><button onClick={this.addTekstField}>Voeg tekst toe</button></span>
                 <span><button onClick={this.addVideoField}>Voeg video toe</button></span>
+                <hr/>
+                <h2>Quiz</h2>
+                {this.state.questions.map(this.renderQuiz)}
+                <span><button onClick={this.addQuestion}>Voeg vraag toe</button></span>
+                <hr/>
                 <input type="submit" value="Opslaan" />
             </section>
           </form>
