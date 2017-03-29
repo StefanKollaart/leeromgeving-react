@@ -36,7 +36,6 @@ export class CreateTrack extends PureComponent {
   }
 
   handleCourse(course) {
-    debugger
     const newCourse = this.props.allCourses.reduce((prev, next) => {
       if (String(next.courseType) === String(course.target.value)) {
         return next

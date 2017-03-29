@@ -7,7 +7,6 @@ const api = new API()
 const tracks = api.service('tracks')
 
 export default(track) => {
-  debugger
   return(dispatch) => {
     api.app.authenticate()
     .then((authResult) => {

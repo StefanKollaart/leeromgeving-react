@@ -9,6 +9,7 @@ class AdminTracks extends PureComponent {
         <h1>Tracks</h1>
         <ul>
           <li><Link to="/admin/create-track">Nieuwe track</Link></li>
+          <li><Link to="/admin/tracks/all">Bewerk tracks</Link></li>
         </ul>
       </div>
     )

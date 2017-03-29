@@ -26,6 +26,9 @@ import UsersContainer from './admin/users/UsersContainer'
 
 import AdminTracks from './admin/tracks/AdminTracks'
 import CreateTrack from './admin/tracks/CreateTrack'
+import EditTrack from './admin/tracks/EditTrack'
+import AdminTracksContainer from './admin/tracks/TracksContainer'
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -47,7 +50,9 @@ ReactDOM.render(
         <Route path="/admin/lessons/:lessonId" component={EditLesson} />
         <Route path="/admin/create-lesson" component={CreateLesson} />
         <Route path="/admin/tracks" component={AdminTracks} />
+        <Route path="/admin/tracks/all" component={AdminTracksContainer} />
         <Route path="/admin/create-track" component={CreateTrack} />
+        <Route path="/admin/tracks/:trackId" component={EditTrack} />
       </Route>
     </Router>
   </Provider>,

@@ -9,7 +9,7 @@ export default (lesson) => {
   return (dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      lessons.patch(lesson._id, { lessonNumber: lesson.lessonNumber, title: lesson.title, content: lesson.content, courses: lesson.courses })
+      lessons.patch(lesson._id, { lessonNumber: lesson.lessonNumber, title: lesson.title, content: lesson.content, track: lesson.track })
       .then((response) => {
         dispatch({ type: UPDATED_LESSON, payload: response })
         history.push(`/admin/lessons/all`)

@@ -5,15 +5,15 @@ import fetchLessons from '../../actions/lessons/fetch'
 import ContentFields from './ContentFields'
 import TekstFields from './TekstFields'
 import update from '../../actions/lessons/update'
-import RenderCheckboxes from '../users/RenderCheckboxes'
-import fetchCourses from '../../actions/courses/fetch'
+import TrackSelect from './TrackSelect'
+import fetchTracks from '../../actions/tracks/fetch'
 
 
 export class EditLesson extends Component {
 
   componentWillMount() {
     this.props.fetchLessons()
-    this.props.fetchCourses()
+    this.props.fetchTracks()
     this.loadEditLesson = this.loadEditLesson.bind(this)
     this.handleNumber = this.handleNumber.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
@@ -24,51 +24,29 @@ export class EditLesson extends Component {
     this.renderContent = this.renderContent.bind(this)
     this.handleVideo = this.handleVideo.bind(this)
     this.handleTekst = this.handleTekst.bind(this)
-    this.handleCourses = this.handleCourses.bind(this)
+    this.handleTrack = this.handleTrack.bind(this)
     this.renderCheckboxes = this.renderCheckboxes.bind(this)
   }
 
   loadEditLesson() {
     if (this.state == null) {
-      let userCourses
-      if (this.props.courses) {
-        userCourses = this.props.courses
+      let userTrack
+      if (this.props.track) {
+        userTrack = this.props.track._id
       } else {
-        userCourses = []
+        userTrack = {}
       }
       this.state = {
         lessonNumber: this.props.lessonNumber,
         title: this.props.title,
         content: this.props.content,
-        courses: userCourses,
+        track: userTrack,
       }
     }
   }
 
-  renderCheckboxes(checkbox, index) {
-    return <RenderCheckboxes key={index} checkBoxId={index} userCourses={this.props.courses} {...checkbox} handleCourses={this.handleCourses} />
-  }
-
-  handleCourses(changedCourse, isChecked) {
-    var newCourses = this.state.courses
-    var fullCourse = this.props.allCourses.find(function(course) {
-      return course.courseType == changedCourse.courseType
-    })
-    if(isChecked) {
-      newCourses.push(fullCourse)
-    } else {
-      newCourses = this.state.courses.filter(function(course) {
-        if (course.courseType != fullCourse.courseType) {
-          return true
-        } else {
-          return false
-        }
-      })
-    }
-    this.setState({
-      courses: newCourses
-    }, function() {
-    })
+  renderCheckboxes(track, index) {
+    return <TrackSelect key={index} checkBoxId={index} userTrack={this.props.track} {...track} handleTracks={this.handleTracks} />
   }
 
   handleNumber(event) {
@@ -129,14 +107,32 @@ export class EditLesson extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+
+    const newTrack = this.props.allTracks.reduce((prev, next) => {
+      if (String(next._id) === String(this.state.track)) {
+        return next
+      }
+      return prev
+    }, {})
+
     const lesson = {
       _id: this.props._id,
       lessonNumber: this.state.lessonNumber,
       title: this.state.title,
       content: this.state.content,
-      courses: this.state.courses,
+      track: newTrack,
     }
     this.props.update(lesson)
+  }
+
+  trackSelect(track, index) {
+    return <TrackSelect key={index} trackId={index} {...track}/>
+  }
+
+  handleTrack(track) {
+    this.setState({
+      track: track.target.value
+    })
   }
 
   render() {
@@ -144,6 +140,7 @@ export class EditLesson extends Component {
       if(this.state == null) {
         {this.loadEditLesson()}
       }
+
         return (
 						<div className="inner">
               <form onSubmit={this.handleSubmit}>
@@ -153,8 +150,12 @@ export class EditLesson extends Component {
                   <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
-                  <label>Opleidingen <span className="required"></span></label>
-                  {this.props.allCourses.map(this.renderCheckboxes)}
+                  <label>Track <span className="required">*</span>
+                  <select value={this.state.track} onChange={this.handleTrack}>
+                    <option>Selecteer</option>
+                    {this.props.allTracks.map(this.trackSelect)}
+                  </select>
+                  </label>
                 </section>
               <section>
                 <hr/>
@@ -173,7 +174,7 @@ export class EditLesson extends Component {
   }
 }
 
-const mapStateToProps = ({ lessons, courses }, { params }) => {
+const mapStateToProps = ({ lessons, tracks }, { params }) => {
   const lesson = lessons.reduce((prev, next) => {
     if (next._id === params.lessonId) {
       return next
@@ -182,8 +183,8 @@ const mapStateToProps = ({ lessons, courses }, { params }) => {
   }, {})
 
   return {
-    ...lesson, allCourses: courses
+    ...lesson, allTracks: tracks
   }
 }
 
-export default connect(mapStateToProps, { fetchLessons, update, fetchCourses})(EditLesson)
+export default connect(mapStateToProps, { fetchLessons, update, fetchTracks})(EditLesson)
