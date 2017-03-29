@@ -33,7 +33,6 @@ import AdminTracksContainer from './admin/tracks/TracksContainer'
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/setpassword/:tokenId" component={SetPassword} />
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
         <Route path="/lessons/:lessonId" component={LessonPage} />

@@ -1,5 +1,5 @@
 import API from '../../middleware/api'
-export const UPDATED_CURRENT_USER = 'UPDATED_USER'
+export const UPDATED_CURRENT_USER = 'UPDATED_CURRENT_USER'
 
 const api = new API()
 const users = api.service('users')

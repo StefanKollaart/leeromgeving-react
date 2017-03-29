@@ -3,7 +3,6 @@ import { USER_SIGNED_OUT } from '../actions/user/sign-out'
 import { FETCHED_CURRENT } from '../actions/user/fetch-current'
 import { UPDATED_CURRENT_USER } from '../actions/user/lesson-working'
 
-
 const CURRENT_USER_KEY = 'kollaart.currentUser'
 
 const initialState = JSON.parse(localStorage.getItem(CURRENT_USER_KEY))
