@@ -8,6 +8,7 @@ import { Router, Route, IndexRoute } from 'react-router'
 
 import LessonsContainer from './lessons/LessonsContainer'
 import LessonPage from './lessons/LessonPage'
+import QuizPage from './lessons/QuizPage'
 
 import SignIn from './users/SignIn'
 import SetPassword from './users/SetPassword'
@@ -36,6 +37,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
         <Route path="/lessons/:lessonId" component={LessonPage} />
+        <Route path="/quiz/:lessonId" component={QuizPage} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
       <Route path="/admin" component={Adminapp}>

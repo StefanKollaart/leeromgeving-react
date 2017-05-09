@@ -45,6 +45,7 @@ export class UserStats extends Component {
 
   render() {
     const { signedIn, userName, lessonWorking } = this.props
+    console.log(this.props)
     return(
       <section id="banner" className="major">
         <div className="inner">

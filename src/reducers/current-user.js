@@ -18,10 +18,15 @@ export default (state = initialState, { type, payload }) => {
       localStorage.removeItem(CURRENT_USER_KEY)
       return null
 
-      case UPDATED_CURRENT_USER :
-          const updatedCurrentUser = Object.assign({}, payload)
-          localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(updatedCurrentUser))
-          return updatedCurrentUser
+    case UPDATED_CURRENT_USER :
+        const updatedCurrentUser = Object.assign({}, payload)
+        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(updatedCurrentUser))
+        return updatedCurrentUser
+
+    case FETCHED_CURRENT :
+        const newCurrentUser = Object.assign({}, payload[0])
+        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newCurrentUser))
+        return newCurrentUser
 
 
     default :

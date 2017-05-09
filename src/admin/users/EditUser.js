@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import editUser from '../../actions/user/update'
+import resetUserProgress from '../../actions/user/reset'
 import fetchUsers from '../../actions/user/fetch'
 import fetchCourses from '../../actions/courses/fetch'
 import RenderCheckboxes from './RenderCheckboxes'
@@ -82,6 +83,10 @@ export class EditUser extends Component {
       this.props.editUser(user)
   }
 
+  resetProgress() {
+    this.props.resetUserProgress(this.props.params.userId)
+  }
+
   render() {
     if(this.props.email != undefined) {
       {this.loadEditUser()}
@@ -101,6 +106,7 @@ export class EditUser extends Component {
                       {this.props.allCourses.map(this.renderCheckboxes)}
                   <input type="submit" value="Aanmaken" />
               </form>
+              <button onClick={this.resetProgress.bind(this)}>Reset</button>
             </section>
           </div>
       )
@@ -125,4 +131,4 @@ const mapStateToProps = ({ users, courses }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { editUser, fetchUsers, fetchCourses })(EditUser)
+export default connect(mapStateToProps, { editUser, resetUserProgress, fetchUsers, fetchCourses })(EditUser)

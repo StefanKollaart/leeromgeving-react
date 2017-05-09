@@ -11,7 +11,16 @@ export default(user) => {
     .then((authResult) => {
       users.find()
         .then((result) => {
-          dispatch(fetchedUser(result.data[0]))
+          let pushResult = result.data.reduce(function(prev, next) {
+            if (prev._id == user._id) {
+              return prev
+            } else if (next._id == user._id) {
+              return next
+            } else {
+              return { _id: "notfound" }
+            }
+          })
+          dispatch(fetchedUser(pushResult))
         }).catch((error) => {
           console.error(error)
         })
