@@ -14,7 +14,7 @@ class LessonItem extends PureComponent {
     const currentUserLessons = currentUser.unlockedLessons.map(function(lesson) {
       return lesson._id
     })
-    
+
     if (currentUserLessons.includes(_id)) {
       return (
 

@@ -6,11 +6,13 @@ const users = api.service('users')
 
 export default (user) => {
   return (dispatch) => {
+    debugger
     api.app.authenticate()
     .then((authResult) => {
       users.get(user)
       .then((getResult) => {
-        users.patch(user, { $set: { lesson_done: [], unlockedLessons: [getResult.unlockedLessons[0]], content_working: 0, lesson_working: getResult.unlockedLessons[0] }})
+        debugger
+        users.patch(user._id, { $set: { unlockedLessons: user.unlockedLessons, content_working: 0, lesson_working: user.unlockedLessons[0] }})
         .then((response) => {
           console.log(response)
           dispatch({ type: UPDATED_CURRENT_USER, payload: response })
