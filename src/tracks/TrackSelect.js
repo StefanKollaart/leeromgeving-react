@@ -7,14 +7,15 @@ class TrackSelect extends PureComponent {
 
   componentWillMount() {
     this.props.fetchTracks();
+    this.renderTrack = this.renderTrack.bind(this)
   }
 
   renderTrack(track, index) {
-    return <UserTrack key={index} {...track} />
+    const currentUser = this.props.currentUser
+    return <UserTrack key={index} {...track} userId={currentUser._id} />
   }
 
   render() {
-    debugger
     return (
       <div id="main">
         <section id="one">
