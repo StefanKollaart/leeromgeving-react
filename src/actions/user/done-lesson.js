@@ -8,7 +8,6 @@ const lessons = api.service('lessons')
 
 export default (user, lesson_done) => {
   return (dispatch) => {
-    debugger
     api.app.authenticate()
     .then((authResult) => {
       lessons.get(lesson_done)

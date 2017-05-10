@@ -15,13 +15,14 @@ class UserTrack extends PureComponent {
       _id: this.props.userId,
       track: this.props._id
     };
-    debugger
     this.props.trackSelect(user);
   }
 
   render() {
     return (
-      <a onClick={this.setTrack}>{this.props.name}</a>
+      <div>
+        <a onClick={this.setTrack}>{this.props.name}</a>
+      </div>
     )
   }
 }

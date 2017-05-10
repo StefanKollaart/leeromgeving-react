@@ -17,12 +17,10 @@ class LessonsContainer extends PureComponent {
 
   }
   renderLessons(lesson, index) {
-    if (lesson.track && this.props.currentUser.admin != true) {
+    if (lesson.track) {
       if (String(lesson.track._id) == String(this.props.currentUser.track)) {
         return <LessonItem key={index} {...lesson} currentUser={this.props.currentUser} />
       }
-    } else if(this.props.currentUser.admin == true){
-      return <LessonItem key={index} {...lesson} currentUser={this.props.currentUser} />
     }
   }
 

@@ -1,8 +1,12 @@
 import API from '../../middleware/api'
 export const UPDATED_USER = 'UPDATED_USER'
+import setFirstLesson from '../user/first-lesson'
+
 
 const api = new API()
 const users = api.service('users')
+const lessons = api.service('lessons')
+
 
 export default (user) => {
   return (dispatch) => {
@@ -10,8 +14,18 @@ export default (user) => {
     .then((authResult) => {
       users.patch(user._id, { $set: { track: user.track }})
       .then((response) => {
-        console.log(response)
-        dispatch({ type: UPDATED_USER, payload: response })
+        let newData;
+        lessons.find()
+        .then((lessonResponse) => {
+          newData = lessonResponse.data.filter(function(lesson) {
+            if (lesson.track && lesson.track._id == user.track) {
+              return true
+            }
+          })
+          authResult.data.unlockedLessons = [newData[0]]
+          dispatch(setFirstLesson(authResult.data))
+          dispatch({ type: UPDATED_USER, payload: authResult })
+        })
       })
     })
 

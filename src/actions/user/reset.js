@@ -10,7 +10,7 @@ export default (user) => {
     .then((authResult) => {
       users.get(user)
       .then((getResult) => {
-        users.patch(user, { $set: { lesson_done: [], unlockedLessons: [getResult.unlockedLessons[0]], content_working: 0, lesson_working: getResult.unlockedLessons[0] }})
+        users.patch(user, { $set: { lesson_done: [], unlockedLessons: [], content_working: 0, lesson_working: getResult.unlockedLessons[0], track: null }})
         .then((response) => {
           console.log(response)
           dispatch({ type: UPDATED_CURRENT_USER, payload: response })
