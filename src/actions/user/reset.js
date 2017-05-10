@@ -1,5 +1,5 @@
 import API from '../../middleware/api'
-export const UPDATED_CURRENT_USER = 'UPDATED_CURRENT_USER'
+export const UPDATED_USER = 'UPDATED_USER'
 
 const api = new API()
 const users = api.service('users')
@@ -8,13 +8,10 @@ export default (user) => {
   return (dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      users.get(user)
-      .then((getResult) => {
-        users.patch(user, { $set: { lesson_done: [], unlockedLessons: [], content_working: 0, lesson_working: getResult.unlockedLessons[0], track: null }})
-        .then((response) => {
-          console.log(response)
-          dispatch({ type: UPDATED_CURRENT_USER, payload: response })
-        })
+      users.update(user, { $set: { lesson_done: [], unlockedLessons: [], content_working: 0, lesson_working: null, track: null }})
+      .then((response) => {
+        console.log(response)
+        dispatch({ type: UPDATED_USER, payload: response })
       })
     })
     .catch((error) => {
