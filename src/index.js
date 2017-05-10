@@ -30,6 +30,8 @@ import CreateTrack from './admin/tracks/CreateTrack'
 import EditTrack from './admin/tracks/EditTrack'
 import AdminTracksContainer from './admin/tracks/TracksContainer'
 
+import TrackSelect from './tracks/TrackSelect'
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -39,6 +41,7 @@ ReactDOM.render(
         <Route path="/lessons/:lessonId" component={LessonPage} />
         <Route path="/quiz/:lessonId" component={QuizPage} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/track-select" component={TrackSelect} />
       </Route>
       <Route path="/admin" component={Adminapp}>
         <IndexRoute component={Admindex} />
