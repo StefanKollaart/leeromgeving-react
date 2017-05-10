@@ -12,7 +12,13 @@ export default (user) => {
   return (dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      users.patch(user._id, { $set: { track: user.track }})
+      if (authResult.data.allTracks) {
+        authResult.data.allTracks.push(user.track);
+      } else {
+        authResult.data.allTracks = [user.track];
+      }
+      console.log(authResult.data);
+      users.patch(user._id, { $set: { track: user.track , allTracks: authResult.data.allTracks }})
       .then((response) => {
         let newData;
         lessons.find()

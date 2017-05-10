@@ -17,18 +17,21 @@ class TrackSelect extends PureComponent {
   }
 
   render() {
+    let h1Fade = 2;
+    let h2Fade = 4;
+    let tileFade = 6;
     return (
       <div id="main">
         <section id="one" className="track-select">
           <div className="inner">
-            <Fade duration='2'>
+            <Fade duration={h1Fade}>
               <h1>Welkom bij Kollaart Opleidingen, {this.props.currentUser.first_name}.</h1>
             </Fade>
-            <Fade duration='4'>
+            <Fade duration={h2Fade}>
               <h2>Met welk onderwerp wil je starten?</h2>
             </Fade>
           </div>
-          <Fade duration='5'>
+          <Fade duration={tileFade}>
           <section className='tiles'>
             {this.props.tracks.map(this.renderTrack)}
           </section>
