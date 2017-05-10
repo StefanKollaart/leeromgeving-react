@@ -22,9 +22,10 @@ class TrackSelect extends PureComponent {
           <div className="inner">
             <h1>Welkom, {this.props.currentUser.first_name}.</h1>
             <h2>Met welk onderwerp wil je starten?</h2>
-            {this.props.tracks.map(this.renderTrack)}
           </div>
-
+          <section className='tiles'>
+            {this.props.tracks.map(this.renderTrack)}
+          </section>
         </section>
       </div>
     )

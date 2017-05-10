@@ -20,9 +20,16 @@ class UserTrack extends PureComponent {
 
   render() {
     return (
-      <div>
-        <a onClick={this.setTrack}>{this.props.name}</a>
-      </div>
+      <article style={{background: 'url(http://i.imgur.com/RRUe0Mo.png)', backgroundSize: 'cover'}}>
+        <span className="image">
+          <img src="http://i.imgur.com/aj3Pl4y.jpg" alt="" />
+        </span>
+        <header className="major">
+          <h3>{this.props.name}</h3>
+          <p>Deze les gaat over..</p>
+          <button onClick={this.setTrack} className="lerenButton">Kies deze track</button>
+        </header>
+      </article>
     )
   }
 }

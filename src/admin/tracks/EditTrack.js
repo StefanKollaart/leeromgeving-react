@@ -48,8 +48,8 @@ export class EditTrack extends PureComponent {
       course: newCourse,
       name: this.state.name,
       order: this.state.order,
+      _id: this.props._id
     }
-    debugger
     this.props.updateTrack(track)
   }
 
