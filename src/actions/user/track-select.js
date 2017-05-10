@@ -1,7 +1,7 @@
 import API from '../../middleware/api'
 export const UPDATED_USER = 'UPDATED_USER'
 import setFirstLesson from '../user/first-lesson'
-
+import { history } from '../../store'
 
 const api = new API()
 const users = api.service('users')
@@ -25,6 +25,7 @@ export default (user) => {
           authResult.data.unlockedLessons = [newData[0]]
           dispatch(setFirstLesson(authResult.data))
           dispatch({ type: UPDATED_USER, payload: authResult })
+          history.push('/')
         })
       })
     })

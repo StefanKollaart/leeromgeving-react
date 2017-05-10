@@ -9,7 +9,7 @@ export default (track) => {
   return (dispatch) => {
     api.app.authenticate()
     .then((authResult) => {
-      tracks.patch(track._id, { course: track.course, name: track.name, order: track.order })
+      tracks.patch(track._id, { course: track.course, name: track.name, order: track.order, image: track.image })
       .then((response) => {
         dispatch({ type: UPDATED_TRACK, payload: response })
         history.push(`/admin/tracks/all`)

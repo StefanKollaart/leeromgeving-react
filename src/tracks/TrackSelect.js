@@ -2,6 +2,7 @@ import React, {PureComponent, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import fetchTracks from '../actions/tracks/fetch'
 import UserTrack from './UserTrack'
+import Fade from 'react-fade'
 
 class TrackSelect extends PureComponent {
 
@@ -18,14 +19,20 @@ class TrackSelect extends PureComponent {
   render() {
     return (
       <div id="main">
-        <section id="one">
+        <section id="one" className="track-select">
           <div className="inner">
-            <h1>Welkom, {this.props.currentUser.first_name}.</h1>
-            <h2>Met welk onderwerp wil je starten?</h2>
+            <Fade duration='2'>
+              <h1>Welkom bij Kollaart Opleidingen, {this.props.currentUser.first_name}.</h1>
+            </Fade>
+            <Fade duration='4'>
+              <h2>Met welk onderwerp wil je starten?</h2>
+            </Fade>
           </div>
+          <Fade duration='5'>
           <section className='tiles'>
             {this.props.tracks.map(this.renderTrack)}
           </section>
+          </Fade>
         </section>
       </div>
     )

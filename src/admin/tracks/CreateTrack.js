@@ -10,6 +10,7 @@ export class CreateTrack extends PureComponent {
     this.props.fetchCourses()
     this.courseSelect = this.courseSelect.bind(this)
     this.handleCourse = this.handleCourse.bind(this)
+    this.handleImage = this.handleImage.bind(this)
     this.handleOrder = this.handleOrder.bind(this)
     this.handleName = this.handleName.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,6 +19,7 @@ export class CreateTrack extends PureComponent {
       name: "",
       course: {},
       order: 1,
+      image: "",
     }
   }
 
@@ -27,6 +29,7 @@ export class CreateTrack extends PureComponent {
       course: this.state.course,
       name: this.state.name,
       order: this.state.order,
+      image: this.state.image,
     }
     this.props.newTrack(track)
   }
@@ -53,6 +56,12 @@ export class CreateTrack extends PureComponent {
     });
   }
 
+  handleImage(event) {
+    this.setState({
+      image: event.target.value
+    });
+  }
+
   handleOrder(event) {
     this.setState({
       order: event.target.value
@@ -68,6 +77,8 @@ export class CreateTrack extends PureComponent {
             <div className="input">
               <label>Naam <span className="required">*</span></label>
               <input value={this.state.name} onChange={this.handleName} type="text" placeholder="Title" />
+              <label>Afbeelding (URL) <span className="required">*</span></label>
+              <input value={this.state.image} onChange={this.handleImage} type="text" placeholder="Title" />
               <label>Volgorde <span className="required">*</span></label>
               <input value={this.state.order} onChange={this.handleOrder} type="number" placeholder="Number" />
               <label>Opleiding <span className="required">*</span>

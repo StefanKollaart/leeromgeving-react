@@ -2,6 +2,7 @@ import React, {PureComponent, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import trackSelect from '../actions/user/track-select'
+import Fade from 'react-fade'
 
 class UserTrack extends PureComponent {
 
@@ -20,13 +21,12 @@ class UserTrack extends PureComponent {
 
   render() {
     return (
-      <article style={{background: 'url(http://i.imgur.com/RRUe0Mo.png)', backgroundSize: 'cover'}}>
+      <article style={{background: `url(${this.props.image})`, backgroundSize: 'cover'}}>
         <span className="image">
           <img src="http://i.imgur.com/aj3Pl4y.jpg" alt="" />
         </span>
         <header className="major">
           <h3>{this.props.name}</h3>
-          <p>Deze les gaat over..</p>
           <button onClick={this.setTrack} className="lerenButton">Kies deze track</button>
         </header>
       </article>

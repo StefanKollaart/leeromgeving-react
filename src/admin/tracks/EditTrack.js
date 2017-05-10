@@ -12,6 +12,7 @@ export class EditTrack extends PureComponent {
     this.props.fetchCourses()
     this.loadEditTrack = this.loadEditTrack.bind(this)
     this.courseSelect = this.courseSelect.bind(this)
+    this.handleImage = this.handleImage.bind(this)
     this.handleCourse = this.handleCourse.bind(this)
     this.handleOrder = this.handleOrder.bind(this)
     this.handleName = this.handleName.bind(this)
@@ -30,6 +31,7 @@ export class EditTrack extends PureComponent {
         course: userCourse,
         name: this.props.name,
         order: this.props.order,
+        image: this.props.image,
       }
     }
   }
@@ -37,8 +39,6 @@ export class EditTrack extends PureComponent {
   handleSubmit(event) {
     event.preventDefault()
     const newCourse = this.props.allCourses.reduce((prev, next) => {
-      console.log(next.courseType)
-      console.log(this.state.course)
       if (String(next.courseType) === String(this.state.course)) {
         return next
       }
@@ -48,7 +48,8 @@ export class EditTrack extends PureComponent {
       course: newCourse,
       name: this.state.name,
       order: this.state.order,
-      _id: this.props._id
+      _id: this.props._id,
+      image: this.state.image,
     }
     this.props.updateTrack(track)
   }
@@ -66,6 +67,12 @@ export class EditTrack extends PureComponent {
   handleName(event) {
     this.setState({
       name: event.target.value
+    });
+  }
+
+  handleImage(event) {
+    this.setState({
+      image: event.target.value
     });
   }
 
@@ -88,6 +95,8 @@ export class EditTrack extends PureComponent {
               <div className="input">
                 <label>Naam <span className="required">*</span></label>
                 <input value={this.state.name} onChange={this.handleName} type="text" placeholder="Title" />
+                <label>Afbeelding (URL) <span className="required">*</span></label>
+                <input value={this.state.image} onChange={this.handleImage} type="text" placeholder="http://" />
                 <label>Volgorde <span className="required">*</span></label>
                 <input value={this.state.order} onChange={this.handleOrder} type="number" placeholder="Number" />
                 <label>Opleiding <span className="required">*</span>

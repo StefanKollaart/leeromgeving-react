@@ -13,7 +13,7 @@ export default(track) => {
       tracks.create(track)
         .then((result) => {
           dispatch({ type: CREATED_TRACK, payload: result })
-          // history.push(`/admin/tracks/${result._id}`)
+          history.push(`/admin/tracks/${result._id}`)
         }).catch((error) => {
           console.error(error)
         })
