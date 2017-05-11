@@ -38,7 +38,7 @@ export default(user) => {
               }
               pushResult.lesson_working = nextLesson;
               pushResult.unlockedLessons.push(nextLesson);
-              users.update(user._id, { $set: { lesson_working: pushResult.lesson_working }});
+              users.update(user._id, { $set: { lesson_working: pushResult.lesson_working, unlockedLessons: pushResult.unlockedLessons }});
               dispatch(fetchedUser(pushResult))
             })
           }
