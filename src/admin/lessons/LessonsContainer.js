@@ -2,18 +2,25 @@ import React, { PureComponent, PropTypes } from 'react'
 import LessonItem from './LessonItem'
 import { connect } from 'react-redux'
 import fetchLessons from '../../actions/lessons/fetch'
+import fetchTracks from '../../actions/tracks/fetch'
+import TrackItem from './TrackItem'
 
 class LessonsContainer extends PureComponent {
   static propTypes = {
     lessons: PropTypes.array.isRequired,
     fetchLessons: PropTypes.func.isRequired,
   }
-  renderLessons(lesson, index) {
-    return <LessonItem key={index} {...lesson} />
+
+  renderTracks(track, index) {
+    return <TrackItem key={index} {...track} lessons={this.props.lessons} />
   }
 
+  componentWillMount() {
+    this.renderTracks = this.renderTracks.bind(this)
+  }
   componentDidMount() {
     this.props.fetchLessons()
+    this.props.fetchTracks()
   }
 
   render() {
@@ -25,7 +32,7 @@ class LessonsContainer extends PureComponent {
 
         <main>
           <ul>
-            {this.props.lessons.map(this.renderLessons)}
+            {this.props.tracks.map(this.renderTracks)}
           </ul>
         </main>
       </div>
@@ -33,8 +40,8 @@ class LessonsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ lessons }) => ({
-  lessons
+const mapStateToProps = ({ lessons, tracks }) => ({
+  lessons, tracks
 })
 
-export default connect(mapStateToProps, { fetchLessons })(LessonsContainer)
+export default connect(mapStateToProps, { fetchLessons, fetchTracks })(LessonsContainer)

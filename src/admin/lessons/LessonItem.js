@@ -7,11 +7,17 @@ class LessonItem extends PureComponent {
     title: PropTypes.string.isRequired,
   }
   render() {
-    const { _id, title } = this.props
+    const { _id, title, trackId, track } = this.props
 
-    return (
-        <li><Link to={`/admin/lessons/${_id}`}>{title}</Link></li>
-    )
+    if (trackId == track._id) {
+      return (
+          <li><Link to={`/admin/lessons/${_id}`}>{title}</Link></li>
+      )
+    } else {
+      return (
+        <span></span>
+      )
+    }
   }
 }
 
