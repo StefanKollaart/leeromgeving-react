@@ -8,6 +8,8 @@ import update from '../../actions/lessons/update'
 import TrackSelect from './TrackSelect'
 import fetchTracks from '../../actions/tracks/fetch'
 import Question from './Question'
+import makeActiveAction from '../../actions/lessons/make-active'
+import makeInactive from '../../actions/lessons/make-inactive'
 
 
 export class EditLesson extends Component {
@@ -16,7 +18,6 @@ export class EditLesson extends Component {
     this.props.fetchLessons()
     this.props.fetchTracks()
     this.loadEditLesson = this.loadEditLesson.bind(this)
-    this.handleNumber = this.handleNumber.bind(this)
     this.handleAnswer = this.handleAnswer.bind(this)
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
@@ -34,6 +35,7 @@ export class EditLesson extends Component {
     this.handleTekst = this.handleTekst.bind(this)
     this.handleTrack = this.handleTrack.bind(this)
     this.renderCheckboxes = this.renderCheckboxes.bind(this)
+    this.makeActive = this.makeActive.bind(this)
   }
 
   loadEditLesson() {
@@ -45,7 +47,6 @@ export class EditLesson extends Component {
         userTrack = {}
       }
       this.state = {
-        lessonNumber: this.props.lessonNumber,
         title: this.props.title,
         content: this.props.content,
         track: userTrack,
@@ -56,12 +57,6 @@ export class EditLesson extends Component {
 
   renderCheckboxes(track, index) {
     return <TrackSelect key={index} checkBoxId={index} userTrack={this.props.track} {...track} handleTracks={this.handleTracks} />
-  }
-
-  handleNumber(event) {
-    this.setState({
-      lessonNumber: event.target.value
-    });
   }
 
   handleTitle(event) {
@@ -97,7 +92,6 @@ export class EditLesson extends Component {
   handleCorrectAnswer(questionIndex, event) {
     var newQuestion = this.state.questions
     newQuestion[questionIndex].correctAnswer = Number(event.target.value)
-    debugger
     this.setState({
       questions: newQuestion
     })
@@ -190,7 +184,6 @@ export class EditLesson extends Component {
 
     const lesson = {
       _id: this.props._id,
-      lessonNumber: this.state.lessonNumber,
       title: this.state.title,
       content: this.state.content,
       track: newTrack,
@@ -209,6 +202,43 @@ export class EditLesson extends Component {
     })
   }
 
+  makeActive(e) {
+    e.preventDefault()
+    const newTrack = this.props.allTracks.reduce((prev, next) => {
+      if (String(next._id) === String(this.state.track)) {
+        return next
+      }
+      return prev
+    }, {})
+
+    if (this.props.active) {
+      const lesson = {
+        _id: this.props._id,
+        title: this.state.title,
+        content: this.state.content,
+        track: newTrack,
+        questions: this.state.questions,
+        lessonNumber: this.props.lessonNumber,
+      }
+      this.props.makeInactive(lesson)
+      // les inactief maken (attr active naar false)
+      // loop door alle lessen in track
+      // set lessonNumber naar null en schuif alle lessen erna eentje op
+    } else {
+      const lesson = {
+        _id: this.props._id,
+        title: this.state.title,
+        content: this.state.content,
+        track: newTrack,
+        questions: this.state.questions,
+      }
+      this.props.makeActiveAction(lesson)
+      // attr active naar true
+      // loop door alle lessen in track
+      // set lessonNumber naar eerstvolgende beschikbaar
+    }
+  }
+
   render() {
     if(this.props.title != undefined) {
       if(this.state == null) {
@@ -220,8 +250,6 @@ export class EditLesson extends Component {
               <form onSubmit={this.handleSubmit}>
                 <section>
                   <h1>{this.state.title}</h1>
-                  <label>Lesnummer <span className="required">*</span></label>
-                  <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" />
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" />
                   <label>Track <span className="required">*</span>
@@ -243,6 +271,9 @@ export class EditLesson extends Component {
                 <span><button onClick={this.addQuestion}>Voeg vraag toe</button></span>
                 <hr/>
                 <input type="submit" value="Opslaan" />
+                <div className="make-active">
+                  <button onClick={this.makeActive}>{this.props.active ? "Haal les offline" : "Publiceer les"}</button>
+                </div>
             </section>
           </form>
           </div>
@@ -266,4 +297,4 @@ const mapStateToProps = ({ lessons, tracks }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchLessons, update, fetchTracks})(EditLesson)
+export default connect(mapStateToProps, { fetchLessons, update, fetchTracks, makeActiveAction, makeInactive })(EditLesson)

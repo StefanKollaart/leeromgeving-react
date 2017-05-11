@@ -42,24 +42,41 @@ export class UserStats extends Component {
    }
  }
 
+ checkIfActive() {
+
+ }
+
 
   render() {
     const { signedIn, userName, lessonWorking } = this.props
     console.log(this.props)
-    return(
-      <section id="banner" className="major">
-        <div className="inner">
-          <header className="major">
-            <h1>{this.getGreeting()}, {userName}</h1>
-            <h2>{this.getMessage()}</h2>
-          </header>
-          <div className="content">
-            <p>{lessonWorking ? "Je bent nu bezig met: " : ""}{lessonWorking ? lessonWorking.title : ""}
-            {lessonWorking ? <Link className="leren" to={`/lessons/${lessonWorking._id}`}><br/><button className="lerenButton">Ga verder met {lessonWorking.title}</button></Link> : ""}</p>
+    if (lessonWorking.active) {
+      return(
+        <section id="banner" className="major">
+          <div className="inner">
+            <header className="major">
+              <h1>{this.getGreeting()}, {userName}</h1>
+              <h2>{this.getMessage()}</h2>
+            </header>
+            <div className="content">
+              <p>{lessonWorking ? "Je bent nu bezig met: " : ""}{lessonWorking ? lessonWorking.title : ""}
+              {lessonWorking ? <Link className="leren" to={`/lessons/${lessonWorking._id}`}><br/><button className="lerenButton">Ga verder met {lessonWorking.title}</button></Link> : ""}</p>
+            </div>
           </div>
-        </div>
-      </section>
-    )
+        </section>
+      )
+    } else {
+      return(
+        <section id="banner" className="major">
+          <div className="inner">
+            <header className="major">
+              <h1>{this.getGreeting()}, {userName}</h1>
+              <h2>{this.getMessage()}</h2>
+            </header>
+          </div>
+        </section>
+      )
+    }
   }
 }
 

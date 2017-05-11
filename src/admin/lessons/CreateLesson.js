@@ -8,10 +8,8 @@ export class CreateLesson extends Component {
 
   componentWillMount() {
     this.state = {
-      lessonNumber: '',
       title: '',
     }
-    this.handleNumber = this.handleNumber.bind(this)
     this.handleTitle = this.handleTitle.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -31,7 +29,6 @@ export class CreateLesson extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const lesson = {
-      lessonNumber: this.state.lessonNumber,
       title: this.state.title,
     }
     this.props.newLesson(lesson)
@@ -46,8 +43,6 @@ export class CreateLesson extends Component {
 
           <form onSubmit={this.handleSubmit}>
             <div className="form-fields">
-                  <label>Lesnummer <span className="required">*</span></label>
-                  <input value={this.state.lessonNumber} onChange={this.handleNumber} type="number" placeholder="Number" className="field-long" />
                   <label>Titel <span className="required">*</span></label>
                   <input value={this.state.title} onChange={this.handleTitle} type="text" placeholder="Title" className="field-long"/>
               </div>

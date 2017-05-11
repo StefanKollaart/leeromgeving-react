@@ -4,6 +4,8 @@ import fetchLessons from '../actions/lessons/fetch'
 import ContentItem from './ContentItem'
 import PageIndicators from './PageIndicators'
 import lessonWorking from '../actions/user/lesson-working'
+import { history } from '../store'
+
 
 export class LessonPage extends PureComponent {
   static propTypes = {}
@@ -67,23 +69,31 @@ export class LessonPage extends PureComponent {
 
 
   render() {
-    const { title, content, _id } = this.props
+    const { title, content, _id, active } = this.props
 
-    return(
-      <div id="main">
-        <section id="one">
-          <div className="inner">
-            <header className="major">
-              <h1>{ title }</h1>
-            </header>
-            {((content != undefined && content.length > 0) && this.renderItem(content[this.state.contentId], this.state.contentId))}
-            <div className="arrows">
-              {(content != undefined && <PageIndicators currentUser={this.props.currentUser} lessonId={_id} content={content} contentId={this.state.contentId} increaseContent={this.increaseContent} decreaseContent={this.decreaseContent}/>)}
+    if (active) {
+      return(
+        <div id="main">
+          <section id="one">
+            <div className="inner">
+              <header className="major">
+                <h1>{ title }</h1>
+              </header>
+              {((content != undefined && content.length > 0) && this.renderItem(content[this.state.contentId], this.state.contentId))}
+              <div className="arrows">
+                {(content != undefined && <PageIndicators currentUser={this.props.currentUser} lessonId={_id} content={content} contentId={this.state.contentId} increaseContent={this.increaseContent} decreaseContent={this.decreaseContent}/>)}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
+      )
+    } else {
+      return(
+        <div>
+        {history.push('/')}
       </div>
-    )
+      )
+    }
   }
 }
 

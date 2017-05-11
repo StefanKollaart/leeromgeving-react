@@ -9,14 +9,20 @@ class LessonItem extends PureComponent {
   render() {
     const { _id, title, trackId, track } = this.props
 
-    if (trackId == track._id) {
+    if (track && trackId == track._id) {
       return (
           <li><Link to={`/admin/lessons/${_id}`}>{title}</Link></li>
       )
     } else {
-      return (
-        <span></span>
-      )
+      if(this.props.trackLess) {
+        return (
+          <li><Link to={`/admin/lessons/${_id}`}>{title}</Link></li>
+        )
+      } else {
+        return (
+          <span></span>
+        )
+      }
     }
   }
 }

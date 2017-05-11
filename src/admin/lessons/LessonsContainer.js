@@ -15,8 +15,16 @@ class LessonsContainer extends PureComponent {
     return <TrackItem key={index} {...track} lessons={this.props.lessons} />
   }
 
+  renderTrackless(lesson, index) {
+    if (!lesson.track || lesson.track == null) {
+      return <LessonItem key={index} {...lesson} trackLess={true} />
+    }
+  }
+
   componentWillMount() {
     this.renderTracks = this.renderTracks.bind(this)
+    this.renderTrackless = this.renderTrackless.bind(this)
+
   }
   componentDidMount() {
     this.props.fetchLessons()
@@ -33,6 +41,8 @@ class LessonsContainer extends PureComponent {
         <main>
           <ul>
             {this.props.tracks.map(this.renderTracks)}
+            <h2>Geen track</h2>
+            {this.props.lessons.map(this.renderTrackless)}
           </ul>
         </main>
       </div>
