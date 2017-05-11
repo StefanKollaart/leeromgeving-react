@@ -17,14 +17,13 @@ export default (user) => {
       } else {
         authResult.data.allTracks = [user.track];
       }
-      console.log(authResult.data);
       users.patch(user._id, { $set: { track: user.track , allTracks: authResult.data.allTracks }})
       .then((response) => {
         let newData;
         lessons.find()
         .then((lessonResponse) => {
           newData = lessonResponse.data.filter(function(lesson) {
-            if (lesson.track && lesson.track._id == user.track) {
+            if (lesson.track && lesson.track._id == user.track && lesson.active) {
               return true
             }
           })

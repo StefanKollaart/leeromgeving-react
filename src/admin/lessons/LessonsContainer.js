@@ -24,8 +24,8 @@ class LessonsContainer extends PureComponent {
   componentWillMount() {
     this.renderTracks = this.renderTracks.bind(this)
     this.renderTrackless = this.renderTrackless.bind(this)
-
   }
+
   componentDidMount() {
     this.props.fetchLessons()
     this.props.fetchTracks()
@@ -50,8 +50,8 @@ class LessonsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ lessons, tracks }) => ({
-  lessons, tracks
+const mapStateToProps = ({ lessons, tracks, currentUser }) => ({
+  lessons, tracks, currentUser
 })
 
 export default connect(mapStateToProps, { fetchLessons, fetchTracks })(LessonsContainer)

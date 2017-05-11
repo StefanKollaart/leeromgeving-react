@@ -16,7 +16,7 @@ export default (user) => {
         .then((lessons) => {
           if (response.data.track && response.data.track != null) {
             let userLessons = lessons.data.filter(function(lesson) {
-              if (lesson.track && response.data.track == lesson.track._id) {
+              if (lesson.track && response.data.track == lesson.track._id && lesson.active) {
                 return true
               } else {
                 return false

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import fetchLessons from '../actions/lessons/fetch'
 import fetchCurrentUser from '../actions/user/fetch-current'
 import UserStats from '../components/UserStats'
+import checkWorkingLesson from '../actions/user/check-working-lesson'
 
 class LessonsContainer extends PureComponent {
   static propTypes = {
@@ -14,7 +15,7 @@ class LessonsContainer extends PureComponent {
   componentWillMount() {
     this.renderLessons = this.renderLessons.bind(this)
     this.props.fetchCurrentUser(this.props.currentUser)
-
+    this.props.checkWorkingLesson(this.props.currentUser)
   }
   renderLessons(lesson, index) {
     if (lesson.track) {
@@ -44,4 +45,4 @@ const mapStateToProps = ({ lessons, currentUser }) => ({
   lessons, currentUser
 })
 
-export default connect(mapStateToProps, { fetchLessons, fetchCurrentUser })(LessonsContainer)
+export default connect(mapStateToProps, { fetchLessons, fetchCurrentUser, checkWorkingLesson })(LessonsContainer)
