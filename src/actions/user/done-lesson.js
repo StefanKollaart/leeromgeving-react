@@ -13,7 +13,6 @@ export default (user, lesson_done) => {
     .then((authResult) => {
       lessons.get(lesson_done)
       .then((lesson) => {
-        console.log(lesson)
         lessons.find()
         .then((lessons) => {
           var check = false
@@ -22,13 +21,18 @@ export default (user, lesson_done) => {
               return true
             }
           })
-          let highestLesson = lessonsInTrack.reduce(function(prev, next) {
-            if (prev.lessonNumber > next.LessonNumber) {
-              return prev
-            } else {
-              return next
+          let highestLesson
+          let highestLessonCount = 0
+          for (var i = 0; i < lessonsInTrack.length; i++) {
+            if (lessonsInTrack[i].lessonNumber > highestLessonCount) {
+              highestLesson = lessonsInTrack[i]
+              highestLessonCount = lessonsInTrack[i].lessonNumber
             }
-          })
+          }
+          console.log("lesson_done")
+          console.log(lesson_done)
+          console.log(highestLesson._id)
+          console.log(highestLesson._id == lesson_done)
           if (highestLesson._id == lesson_done) {
             users.patch(user._id, { $push: { lesson_done: lesson}, $set: { track: null, content_working: 0, lesson_working: null  }})
             .then((response) => {
