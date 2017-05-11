@@ -5,6 +5,8 @@ import fetchLessons from '../actions/lessons/fetch'
 import fetchCurrentUser from '../actions/user/fetch-current'
 import UserStats from '../components/UserStats'
 import checkWorkingLesson from '../actions/user/check-working-lesson'
+import { history } from '../store'
+import TrackSelect from '../tracks/TrackSelect'
 
 class LessonsContainer extends PureComponent {
   static propTypes = {
@@ -30,14 +32,23 @@ class LessonsContainer extends PureComponent {
   }
 
   render() {
-    return(
-        <div id="main">
-          <UserStats/>
-          <section id="one" className="tiles">
-            {this.props.lessons.map(this.renderLessons)}
-          </section>
+    if (this.props.currentUser.track) {
+      return(
+          <div id="main">
+            <UserStats/>
+            <section id="one" className="tiles">
+              {this.props.lessons.map(this.renderLessons)}
+            </section>
+          </div>
+      )
+    } else {
+      return(
+        <div>
+          <TrackSelect></TrackSelect>
         </div>
-    )
+      )
+    }
+
   }
 }
 

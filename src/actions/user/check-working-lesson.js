@@ -22,7 +22,7 @@ export default(user) => {
               return { _id: "notfound" }
             }
           })
-          if (pushResult.lesson_working.active == false) {
+          if (pushResult.lesson_working && pushResult.lesson_working.active == false) {
             lessons.find()
             .then((allLessons) => {
               let doneInTrack = pushResult.lesson_done.filter(function(singleLesson){

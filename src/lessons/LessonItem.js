@@ -21,7 +21,7 @@ class LessonItem extends PureComponent {
 
           <article>
             <span className="image">
-              <img src="http://i.imgur.com/aj3Pl4y.jpg" alt="" />
+              <img src="https://s27.postimg.org/am1ifej1f/aj3_Pl4y.jpg" alt="" />
             </span>
             <header className="major">
               <h3>{ title }</h3>
@@ -33,12 +33,12 @@ class LessonItem extends PureComponent {
       } else {
         return <article>
           <span className="image">
-            <img src="http://i.imgur.com/aj3Pl4y.jpg" alt="" />
+            <img src="https://s27.postimg.org/am1ifej1f/aj3_Pl4y.jpg" alt="" />
           </span>
           <header className="major">
             <h3>{ title }</h3>
             <p>Deze les gaat over..</p>
-          <button className="lerenButton"><img src="http://i.imgur.com/7idppli.png" width="12" height="12"/></button>
+          <button className="lerenButton"><img src="https://s27.postimg.org/ca0nu1wwz/7idppli.png" width="12" height="12"/></button>
           </header>
         </article>
       }

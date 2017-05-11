@@ -90,8 +90,8 @@ export class LessonPage extends PureComponent {
     } else {
       return(
         <div>
-        {history.push('/')}
-      </div>
+          {history.push('/')}
+        </div>
       )
     }
   }

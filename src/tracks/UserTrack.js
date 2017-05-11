@@ -20,17 +20,32 @@ class UserTrack extends PureComponent {
   }
 
   render() {
-    return (
-      <article style={{background: `url(${this.props.image})`, backgroundSize: 'cover'}}>
-        <span className="image">
-          <img src="http://i.imgur.com/aj3Pl4y.jpg" alt="" />
-        </span>
-        <header className="major">
-          <h3>{this.props.name}</h3>
-          <button onClick={this.setTrack} className="lerenButton">Kies deze track</button>
-        </header>
-      </article>
-    )
+    if (this.props.userTracks.includes(this.props._id)) {
+      return (
+        <article style={{background: `url(${this.props.image})`, backgroundSize: 'cover'}}>
+          <span className="image">
+            <img src="https://s27.postimg.org/am1ifej1f/aj3_Pl4y.jpg" alt="" />
+          </span>
+          <header className="major">
+            <h3>{this.props.name}</h3>
+            <h3><img width="40px" height="40px" src="https://s3.postimg.org/hmhb6eqqb/5zuae_A9.png"></img> Afgerond</h3>
+          </header>
+        </article>
+      )
+    } else {
+      return (
+        <article style={{background: `url(${this.props.image})`, backgroundSize: 'cover'}}>
+          <span className="image">
+            <img src="https://s27.postimg.org/am1ifej1f/aj3_Pl4y.jpg" alt="" />
+          </span>
+          <header className="major">
+            <h3>{this.props.name}</h3>
+            <button onClick={this.setTrack} className="lerenButton">Kies deze track</button>
+          </header>
+        </article>
+      )
+    }
+
   }
 }
 
