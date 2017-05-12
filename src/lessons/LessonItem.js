@@ -43,7 +43,7 @@ class LessonItem extends PureComponent {
         </article>
       }
     } else {
-      return <span></span>
+      return null
     }
   }
 }

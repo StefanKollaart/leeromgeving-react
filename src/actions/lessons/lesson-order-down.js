@@ -1,6 +1,7 @@
 import API from '../../middleware/api'
-export const UPDATED_LESSON = 'UPDATED_LESSON'
+export const FETCHED_LESSONS = 'FETCHED_LESSONS'
 import { history } from '../../store'
+import fetchLessons from './fetch'
 
 const api = new API()
 const lessons = api.service('lessons')
@@ -26,15 +27,8 @@ export default (lesson) => {
         }
         lesson.lessonNumber = lesson.lessonNumber + 1
         lessons.patch(movingDownLesson._id, { lessonNumber: movingDownLesson.lessonNumber })
-        .then((secondResponse) => {
-          dispatch({ type: UPDATED_LESSON, payload: secondResponse })
-        })
         lessons.patch(lesson._id, { lessonNumber: lesson.lessonNumber })
-        .then((response) => {
-          dispatch({ type: UPDATED_LESSON, payload: response })
-        }).catch((error) => {
-          console.log(error)
-        })
+        dispatch(fetchLessons())
       })
     })
     .catch((error) => {

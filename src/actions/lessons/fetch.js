@@ -11,7 +11,19 @@ export default() => {
     .then((authResult) => {
       lessons.find()
         .then((result) => {
-          dispatch(fetchedLessons(result))
+          let sortedResult = result.data.sort(function(a, b){return a.lessonNumber - b.lessonNumber});
+          let sortedActive = sortedResult.filter(function(lesson) {
+            if (lesson.active) {
+              return true
+            }
+          })
+          let sortedInactive = sortedResult.filter(function(lesson) {
+            if (lesson.active == false) {
+              return true
+            }
+          })
+          let finalSortedResult = sortedActive.concat(sortedInactive)
+          dispatch(fetchedLessons(finalSortedResult))
         })
     })
   }
@@ -20,6 +32,6 @@ export default() => {
 const fetchedLessons = (result) => {
   return {
     type: FETCHED_LESSONS,
-    payload: [].concat(result.data)
+    payload: [].concat(result)
   }
 }

@@ -35,14 +35,14 @@ class LessonItem extends Component {
   }
 
   render() {
-    const { _id, title, trackId, track, active } = this.props
+    const { _id, title, trackId, track, active, lessonNumber, highestLessonNumber } = this.props
 
     if (track && trackId == track._id) {
       if (active) {
         return (
             <li><Link to={`/admin/lessons/${_id}`}>{title}</Link>
-            <img className="arrow-img" onClick={this.higherLessonNumber} src="https://s4.postimg.org/7jsutj33h/placing-arrow-up.png"></img>
-            <img className="arrow-img" onClick={this.lowerLessonNumber} src="https://s4.postimg.org/4bodghgtp/placing-arrow-down.png"></img>
+            {lessonNumber != 1 ? <img className="arrow-img" onClick={this.higherLessonNumber} src="https://s4.postimg.org/7jsutj33h/placing-arrow-up.png"></img> : ""}
+            {lessonNumber != highestLessonNumber ? <img className="arrow-img" onClick={this.lowerLessonNumber} src="https://s4.postimg.org/4bodghgtp/placing-arrow-down.png"></img> : ""}
             </li>
         )
       } else {
