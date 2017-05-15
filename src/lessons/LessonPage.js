@@ -35,7 +35,9 @@ export class LessonPage extends PureComponent {
     let user = this.props.currentUser
     user.lesson_working = this.props.params.lessonId
     user.content_working = this.state.contentId
-    this.props.lessonWorking(user)
+    if (this.props.working) {
+      this.props.lessonWorking(user)
+    }
     this.props.fetchLessons()
   }
 
@@ -45,10 +47,12 @@ export class LessonPage extends PureComponent {
       this.setState({
         contentId: contentId
       }, function() {
-        let user = this.props.currentUser
-        user.lesson_working = this.props.params.lessonId
-        user.content_working = this.state.contentId
-        this.props.lessonWorking(user)
+        if (this.props.working) {
+          let user = this.props.currentUser
+          user.lesson_working = this.props.params.lessonId
+          user.content_working = this.state.contentId
+          this.props.lessonWorking(user)
+        }
       })
     }
   }
@@ -59,10 +63,12 @@ export class LessonPage extends PureComponent {
       this.setState({
         contentId: contentId
       }, function() {
-        let user = this.props.currentUser
-        user.lesson_working = this.props.params.lessonId
-        user.content_working = this.state.contentId
-        this.props.lessonWorking(user)
+        if (this.props.working) {
+          let user = this.props.currentUser
+          user.lesson_working = this.props.params.lessonId
+          user.content_working = this.state.contentId
+          this.props.lessonWorking(user)
+        }
       })
     }
   }
@@ -105,8 +111,10 @@ const mapStateToProps = ({ lessons, currentUser }, { params }) => {
     return prev
   }, {})
 
+  const working = Boolean(params.working)
+
   return {
-    ...lesson, currentUser
+    ...lesson, currentUser, working
   }
 }
 

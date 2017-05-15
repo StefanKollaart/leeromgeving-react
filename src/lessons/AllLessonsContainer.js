@@ -22,7 +22,7 @@ class AllLessonsContainer extends PureComponent {
 
   renderLessons(lesson, index) {
     if (lesson.track && this.props.currentUserLessonsIds.includes(lesson._id) && lesson.track._id != this.props.currentUser.track) {
-      return <LessonItem key={index} {...lesson} currentUser={this.props.currentUser} />
+      return <LessonItem key={index} {...lesson} currentUser={this.props.currentUser} updateCurrent={false} />
     }
   }
 

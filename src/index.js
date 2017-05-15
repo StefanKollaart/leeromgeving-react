@@ -40,7 +40,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
         <Route path="/all" component={AllLessonsContainer} />
-        <Route path="/lessons/:lessonId" component={LessonPage} />
+        <Route path="/lessons/:lessonId/:working" component={LessonPage} />
         <Route path="/quiz/:lessonId" component={QuizPage} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/track-select" component={TrackSelect} />

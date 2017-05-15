@@ -10,7 +10,7 @@ class LessonItem extends PureComponent {
     active: PropTypes.bool,
   }
   render() {
-    const { _id, title, content, currentUser, track, active } = this.props
+    const { _id, title, content, currentUser, track, active, updateCurrent } = this.props
     const currentUserLessons = currentUser.unlockedLessons.map(function(lesson) {
       return lesson._id
     })
@@ -26,7 +26,7 @@ class LessonItem extends PureComponent {
             <header className="major">
               <h3>{ title }</h3>
               <p>Deze les gaat over..</p>
-              <Link className="leren" to={`/lessons/${_id}`}><button className="lerenButton">Leren</button></Link>
+              <Link className="leren" to={`/lessons/${_id}/${updateCurrent}`}><button className="lerenButton">Leren</button></Link>
             </header>
           </article>
         )
