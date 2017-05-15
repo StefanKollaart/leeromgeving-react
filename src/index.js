@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import store, { history } from './store'
 import { Router, Route, IndexRoute } from 'react-router'
 
+import AllLessonsContainer from './lessons/AllLessonsContainer'
 import LessonsContainer from './lessons/LessonsContainer'
 import LessonPage from './lessons/LessonPage'
 import QuizPage from './lessons/QuizPage'
@@ -38,6 +39,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={LessonsContainer} />
+        <Route path="/all" component={AllLessonsContainer} />
         <Route path="/lessons/:lessonId" component={LessonPage} />
         <Route path="/quiz/:lessonId" component={QuizPage} />
         <Route path="/sign-in" component={SignIn} />

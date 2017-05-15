@@ -20,7 +20,8 @@ export class Navigation extends PureComponent {
     return (
       <header id="header" className="alt">
         <nav className="menubar">
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">Leren</Link></li>
+            <li><Link to="/all">Voltooide lessen</Link></li>
             <li>
               {(isAdmin && <Link to="/admin">Admin</Link>) }
             </li>
