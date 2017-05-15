@@ -28,13 +28,13 @@ export default (user) => {
             }
           })
           newData = allTrackLessons.reduce(function(prev, next) {
-            if (prev < next) {
+            if (prev.lessonNumber < next.lessonNumber) {
                 return prev
             } else {
               return next
             }
           })
-          authResult.data.unlockedLessons = [newData]
+          authResult.data.unlockedLessons = authResult.data.unlockedLessons.concat(newData)
           dispatch(setFirstLesson(authResult.data))
           dispatch({ type: UPDATED_USER, payload: authResult })
           history.push('/')

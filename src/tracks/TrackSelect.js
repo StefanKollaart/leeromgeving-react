@@ -38,10 +38,10 @@ class TrackSelect extends PureComponent {
           <section id="one" className="track-select">
             <div className="inner">
               <Fade duration={h1Fade}>
-                {h1Fade = 2 ? <h1>Welkom bij Kollaart Opleidingen, {this.props.currentUser.first_name}.</h1> : <h1>Gefeliciteerd met het voltooien van een track, {this.props.currentUser.first_name}</h1>}
+                {h1Fade == 2 ? <h1>Welkom bij Kollaart Opleidingen, {this.props.currentUser.first_name}.</h1> : <h1>Gefeliciteerd met het voltooien van een track, {this.props.currentUser.first_name}</h1>}
               </Fade>
               <Fade duration={h2Fade}>
-                {h2Fade = 4 ? <h2>Met welk onderwerp wil je starten?</h2> : <h2>Welk onderwerp wil je nu aan gaan pakken?</h2>}
+                {h2Fade == 4 ? <h2>Met welk onderwerp wil je starten?</h2> : <h2>Welk onderwerp wil je nu aan gaan pakken?</h2>}
               </Fade>
             </div>
             <Fade duration={tileFade}>
